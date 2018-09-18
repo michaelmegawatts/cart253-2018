@@ -30,7 +30,7 @@ var feltTextureImageY;
 // Load the new red monkey image
 
 function preload() {
-  monkeyImage = loadImage("assets/images/monkey.jpg");
+  monkeyImage = loadImage("assets/images/monkey.png");
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
 }
