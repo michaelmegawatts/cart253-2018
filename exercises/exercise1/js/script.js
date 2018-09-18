@@ -2,9 +2,17 @@
 // Michael Watts
 //
 // Starter code for exercise 1.
-// It moves two pictures around on the canvas.
+// It moves four pictures around on the canvas.
 // One moves linearly from left to right.
 // One moves toward the mouse cursor.
+// One is displayed at the current mouse location
+// One follows mouse cursor at different speed
+
+// The image of Beyonce serving pizza, called pizza
+var pizzaImage;
+// The starting position of pizza
+var pizzaImageX;
+var pizzaImageY;
 
 // The image of a monkey
 var monkeyImage;
@@ -30,6 +38,7 @@ var feltTextureImageY;
 // Load the new red monkey image
 
 function preload() {
+  pizzaImage = loadImage("assets/images/pizza.png");
   monkeyImage = loadImage("assets/images/monkey.png");
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
@@ -43,6 +52,10 @@ function preload() {
 function setup() {
   // Create our canvas
   createCanvas(640,640);
+
+  // Start pizza image to the left of the clown image that is centre
+  pizzaImageX = width/1;
+  pizzaImageY = height/1;
 
   // Start monkey image at the left of canvas and off screen
   monkeyImageX = 0 - monkeyImage.width/2;
@@ -79,6 +92,18 @@ function draw() {
 
   // Display monkey image
   image(monkeyImage,monkeyImageX,monkeyImageY);
+
+  // Move the pizza by moving the mouseX
+
+  // Calculate the distance in X and in Y
+  var xDistance = mouseX - pizzaImageX;
+  var yDistance = mouseY - pizzaImageY;
+  // Add 1/10th of the x and y distance to the pizza's current (x,y) location
+  pizzaImageX = pizzaImageX + xDistance/10;
+  pizzaImageY = pizzaImageY + yDistance/10;
+
+  // Dispay Beyonce serving pizza, pizza image
+  image(pizzaImage,pizzaImageX,pizzaImageY);
 
   // Move the clown by moving it 1/10th of its current distance from the mouse
 
