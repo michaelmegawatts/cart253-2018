@@ -44,7 +44,9 @@ function setup() {
   // Create our canvas
   createCanvas(640,640);
 
-
+  // Start monkey image at the left of canvas and off screen
+  monkeyImageX = 0 - monkeyImage.width/2;
+  monkeyImageY = height/2;
 
   // Start the clown image at the centre of the canvas
   clownImageX = width/2;
@@ -71,6 +73,12 @@ function draw() {
 
   // Display the felt image
   image(feltTextureImage,feltTextureImageX,feltTextureImageY);
+
+  // Move monkey image from left to right
+  monkeyImageX += 1;
+
+  // Display monkey image
+  image(monkeyImage,monkeyImageX,monkeyImageY);
 
   // Move the clown by moving it 1/10th of its current distance from the mouse
 
