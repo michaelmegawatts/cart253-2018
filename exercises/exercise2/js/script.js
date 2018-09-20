@@ -31,7 +31,14 @@ var enemyVX = 5;
 var enemySpeedIncrease = 0.5;
 
 // How many dodges the player has made
+
 var dodges = 0;
+textSize(75);
+text(dodges, width/2, height/2);
+textAlign(LEFT,BOTTOM);
+textFont(Impact, Charcoal, sans-serif)
+
+
 
 // setup()
 //
@@ -47,6 +54,8 @@ function setup() {
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
   enemyY = random(0,height);
+
+
 
   // No stroke so it looks cleaner
   noStroke();
@@ -151,5 +160,9 @@ function draw() {
   fill(255,0,0);
   // Draw the enemy as a circle
   ellipse(enemyX,enemyY,enemySize,enemySize);
+
+  // The text is blue
+  fill(0,0,255);
+
 
 }
