@@ -109,10 +109,10 @@ function draw() {
   var yDistance = mouseY - pizzaImageY;
 
   // Add 2/10th of the x and y distance to the pizza's current (x,y) location
-  pizzaImageX = pizzaImageX + 2*xDistance/10;
-  pizzaImageY = pizzaImageY + 2*yDistance/10;
+  pizzaImageX = pizzaImageX + xDistance/100;
+  pizzaImageY = pizzaImageY + yDistance/100;
 
-  // Dispay Beyonce serving pizza, pizza image
+  // Display Beyonce serving pizza, pizza image
   image(pizzaImage,pizzaImageX,pizzaImageY);
 
   // Move the clown by moving it 1/10th of its current distance from the mouse
@@ -129,6 +129,6 @@ function draw() {
 
 
   // Show muscle man in middle of canvas
-  image(muscleImage,muscleImageX,muscleImageY);
+  image(muscleImage,mouseX,mouseY);
 
 }
