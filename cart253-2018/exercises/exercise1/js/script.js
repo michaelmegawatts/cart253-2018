@@ -32,12 +32,17 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
+// The image of a muscle man
+var muscleImageX;
+var muscleImageY;
+
 
 // preload()
 //
 // Load the new red monkey image
 
 function preload() {
+  muscleImage = loadImage("assets/images/muscle.png");
   pizzaImage = loadImage("assets/images/pizza.png");
   monkeyImage = loadImage("assets/images/monkey.png");
   clownImage = loadImage("assets/images/clown.png");
@@ -53,9 +58,13 @@ function setup() {
   // Create our canvas
   createCanvas(640,640);
 
-  // Start pizza image to the left of the clown image that is centre
-  pizzaImageX = width/1;
-  pizzaImageY = height/1;
+  // Start muscles image at center of canvas
+  muscleImageX = width/2;
+  muscleImageY = height/2;
+
+  // Start pizza image at center of canvas
+  pizzaImageX = width/2;
+  pizzaImageY = height/2;
 
   // Start monkey image at the left of canvas and off screen
   monkeyImageX = 0 - monkeyImage.width/2;
@@ -98,9 +107,10 @@ function draw() {
   // Calculate the distance in X and in Y
   var xDistance = mouseX - pizzaImageX;
   var yDistance = mouseY - pizzaImageY;
-  // Add 1/10th of the x and y distance to the pizza's current (x,y) location
-  pizzaImageX = pizzaImageX + xDistance/10;
-  pizzaImageY = pizzaImageY + yDistance/10;
+
+  // Add 2/10th of the x and y distance to the pizza's current (x,y) location
+  pizzaImageX = pizzaImageX + 2*xDistance/10;
+  pizzaImageY = pizzaImageY + 2*yDistance/10;
 
   // Dispay Beyonce serving pizza, pizza image
   image(pizzaImage,pizzaImageX,pizzaImageY);
@@ -116,4 +126,9 @@ function draw() {
 
   // Display the clown image
   image(clownImage,clownImageX,clownImageY);
+
+
+  // Show muscle man in middle of canvas
+  image(muscleImage,muscleImageX,muscleImageY);
+
 }
