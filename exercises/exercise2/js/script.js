@@ -17,12 +17,14 @@ var avatarSpeed = 10;
 var avatarVX = 0;
 var avatarVY = 0;
 
-// The position and size of the enemy circle
+// The position and size of the enemy
 var enemyX;
 var enemyY;
 var enemySize = 50;
 // How much bigger the enemy circle gets with each successful dodge
 var enemySizeIncrease = 5;
+// The enemy Beyonce Pizza image
+var enemyImage;
 
 // The speed and velocity of our enemy circle
 var enemySpeed = 5;
@@ -33,12 +35,12 @@ var enemySpeedIncrease = 0.5;
 // How many dodges the player has made
 
 var dodges = 0;
-textSize(75);
-text(dodges, width/2, height/2);
-textAlign(LEFT,BOTTOM);
-textFont(Impact, Charcoal, sans-serif)
 
 
+function preload() {
+  fontRegular = loadFont('assets/fonts/cubicblock_s.ttf');
+  enemyImage = loadImage("assets/images/enemy.png");
+   }
 
 // setup()
 //
@@ -68,6 +70,21 @@ function setup() {
 function draw() {
   // A pink background
   background(255,220,220);
+
+
+  textSize(45);
+  text(dodges, 1, 499);
+  textAlign(LEFT,BOTTOM);
+  textFont(fontRegular)
+
+  // enemy is Beyonce pizza image
+
+
+
+
+  // The enemy is Beyonce Pizza
+  image(enemyImage,enemyX,enemyY)
+
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
@@ -156,10 +173,7 @@ function draw() {
   // Draw the player as a circle
   ellipse(avatarX,avatarY,avatarSize,avatarSize);
 
-  // The enemy is red
-  fill(255,0,0);
-  // Draw the enemy as a circle
-  ellipse(enemyX,enemyY,enemySize,enemySize);
+
 
   // The text is blue
   fill(0,0,255);
