@@ -6,6 +6,8 @@ Pippin Barr
 Starter code for exercise 2.
 
 *********************************************************/
+// Setting canvas color
+var canvasColor;
 
 // The position and size of our avatar circle
 var avatarX;
@@ -15,6 +17,8 @@ var avatarSize = 30;
 // Create new avater with Arnold Schwarzenegger
 var avatarImage;
 var avatarImageSize = 20;
+// How much avatar size decreases with each dodge
+var avatarSizeIncrease = -3;
 
 // The speed and velocity of our avatar circle
 var avatarSpeed = 10;
@@ -53,6 +57,7 @@ function preload() {
 function setup() {
   // Create our playing area
   createCanvas(500,500);
+  canvasColor = color(255,225,0);
 
   // Put the avatar in the centre
   avatarX = width/0;
@@ -62,6 +67,9 @@ function setup() {
   enemyX = 0;
   enemyY = random(0,height);
 
+  // We'll use imageMode CENTER for this script
+  imageMode(CENTER);
+
 
 
   // No stroke so it looks cleaner
@@ -69,13 +77,20 @@ function setup() {
 }
 
 // draw()
-//
+// Create new canvas color
+// add number score with new font
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
   // A yellow background
   // Change Pippin's background to
-  background(255,225,0);
+  background(canvasColor);
+  if (enemyX > 3/4 width) {
+  canvasColor = color(255,0,0);
+  }
+  else {
+    canvasColor = color(255,225,0);
+  }
 
   textSize(60);
   text(dodges, 1, 499);
@@ -166,6 +181,7 @@ function draw() {
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
   }
+
 
   // Display the current number of successful in the console
   console.log(dodges);
