@@ -10,7 +10,11 @@ Starter code for exercise 2.
 // The position and size of our avatar circle
 var avatarX;
 var avatarY;
-var avatarSize = 50;
+var avatarSize = 30;
+
+// Create new avater with Arnold Schwarzenegger
+var avatarImage;
+var avatarImageSize = 20;
 
 // The speed and velocity of our avatar circle
 var avatarSpeed = 10;
@@ -40,18 +44,19 @@ var dodges = 0;
 function preload() {
   fontRegular = loadFont('assets/fonts/cubicblock_s.ttf');
   enemyImage = loadImage("assets/images/enemy.png");
+  avatarImage = loadImage("assets/images/avatar.png");
    }
 
 // setup()
 //
-// Make the canvas, position the avatar and anemy
+// Make the canvas, position the avatar and enemy
 function setup() {
   // Create our playing area
   createCanvas(500,500);
 
   // Put the avatar in the centre
-  avatarX = width/2;
-  avatarY = height/2;
+  avatarX = width/0;
+  avatarY = height/0;
 
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
@@ -68,22 +73,19 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
-  // A pink background
-  background(255,220,220);
+  // A yellow background
+  // Change Pippin's background to
+  background(255,225,0);
 
-
-  textSize(45);
+  textSize(60);
   text(dodges, 1, 499);
   textAlign(LEFT,BOTTOM);
   textFont(fontRegular)
 
-  // enemy is Beyonce pizza image
-
-
-
-
   // The enemy is Beyonce Pizza
-  image(enemyImage,enemyX,enemyY)
+  image(enemyImage,enemyX,enemyY);
+  // The avatar is Arnold Schwarzenegger
+  image(avatarImage,avatarX,avatarY);
 
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
@@ -167,12 +169,6 @@ function draw() {
 
   // Display the current number of successful in the console
   console.log(dodges);
-
-  // The player is black
-  fill(0);
-  // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
-
 
 
   // The text is blue
