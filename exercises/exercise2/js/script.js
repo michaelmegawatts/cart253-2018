@@ -78,6 +78,7 @@ function setup() {
 
 // draw()
 // Create new canvas color
+// Canvas color change for special circumstance with Beyonce
 // add number score with new font
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
@@ -85,7 +86,7 @@ function draw() {
   // A yellow background
   // Change Pippin's background to
   background(canvasColor);
-  if (enemyX > 3/4 width) {
+  if (enemyX > width/1.5) {
   canvasColor = color(255,0,0);
   }
   else {
