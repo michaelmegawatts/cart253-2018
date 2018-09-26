@@ -12,13 +12,13 @@ var canvasColor;
 // The position and size of our avatar circle
 var avatarX;
 var avatarY;
-var avatarSize = 30;
+var avatarSize = 50;
 
 // Create new avater with Arnold Schwarzenegger
 var avatarImage;
 var avatarImageSize = 20;
 // How much avatar size decreases with each dodge
-var avatarSizeIncrease = -3;
+
 
 // The speed and velocity of our avatar circle
 var avatarSpeed = 10;
@@ -63,6 +63,9 @@ function setup() {
   avatarX = width/0;
   avatarY = height/0;
 
+  // Size of avatar changes randomly
+  avatarSize = random 
+
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
   enemyY = random(0,height);
@@ -87,7 +90,7 @@ function draw() {
   // Change Pippin's background to
   background(canvasColor);
   if (enemyX > width/1.5) {
-  canvasColor = color(255,0,0);
+    canvasColor = color(255,0,0);
   }
   else {
     canvasColor = color(255,225,0);
@@ -131,6 +134,8 @@ function draw() {
   // Move the avatar according to its calculated velocity
   avatarX = avatarX + avatarVX;
   avatarY = avatarY + avatarVY;
+
+
 
   // The enemy always moves at enemySpeed (which increases)
   enemyVX = enemySpeed;
