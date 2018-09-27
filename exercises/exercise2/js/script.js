@@ -22,6 +22,8 @@ var avatarImageSize = 20;
 var avatarSpeed = 10;
 var avatarVX = 0;
 var avatarVY = 0;
+// var avatarSizeIncrease = 20;
+// var avatarSpeedIncrease = 0.5;
 
 // The position and size of the enemy Beyonce
 var enemyX;
@@ -131,12 +133,11 @@ function draw() {
   avatarX = avatarX + avatarVX;
   avatarY = avatarY + avatarVY;
 
-
-
   // The enemy always moves at enemySpeed (which increases)
   enemyVX = enemySpeed;
   // Update the enemy's position based on its velocity
   enemyX = enemyX + enemyVX;
+
 
   // Check if the enemy and avatar overlap - if they do the player loses
   // We do this by checking if the distance between the centre of the enemy
@@ -153,6 +154,8 @@ function draw() {
     // Reset the avatar's position
     avatarX = width/2;
     avatarY = height/2;
+    avatarSize = 100;
+    avatarSpeed = 10;
     // Reset the dodge counter
     dodges = 0;
   }
@@ -168,6 +171,8 @@ function draw() {
     avatarX = width/2;
     avatarY = height/2;
     dodges = 0;
+    avatarSize = 100;
+    avatarSpeed = 10;
   }
 
   // Check if the enemy has moved all the way across the screen
@@ -182,7 +187,12 @@ function draw() {
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
+    // Increasing or decreasing size and speed of Arnold
+    avatarSize = random(1,100);
+    avatarSpeed = random(5,25);
+
   }
+
 
 
   // Display the current number of successful in the console
