@@ -13,11 +13,9 @@ var canvasColor;
 var avatarX;
 var avatarY;
 var avatarSize = 100;
-
 // Create new avater with Arnold Schwarzenegger
 var avatarImage;
 var avatarImageSize = 20;
-
 // The speed and velocity of our avatar Arnold
 var avatarSpeed = 10;
 var avatarVX = 0;
@@ -33,7 +31,6 @@ var enemySize = 100;
 var enemySizeIncrease = 20;
 // The enemy Beyonce Pizza image
 var enemyImage;
-
 // The speed and velocity of our enemy Beyonce
 var enemySpeed = 5;
 var enemyVX = 5;
@@ -41,7 +38,6 @@ var enemyVX = 5;
 var enemySpeedIncrease = 0.5;
 
 // How many dodges the player has made
-
 var dodges = 0;
 
 
@@ -62,9 +58,6 @@ function setup() {
   // Put the avatar in the centre
   avatarX = width/0;
   avatarY = height/0;
-
-  // Size of avatar changes randomly
-  // avatarSize = random;
 
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
@@ -151,7 +144,7 @@ function draw() {
     // Reset the enemy's size and speed
     enemySize = 75;
     enemySpeed = 5;
-    // Reset the avatar's position
+    // Reset the avatar's position and speed
     avatarX = width/2;
     avatarY = height/2;
     avatarSize = 100;
@@ -193,11 +186,8 @@ function draw() {
 
   }
 
-
-
   // Display the current number of successful in the console
   console.log(dodges);
-
 
   // The text is blue
   fill(0,0,255);
