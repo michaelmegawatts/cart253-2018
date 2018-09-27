@@ -1,7 +1,7 @@
 /*********************************************************
 
 Exercise 2 - The Artful Dodger
-Pippin Barr
+Pippin Barr as interpreted by Michael Watts
 
 Starter code for exercise 2.
 
@@ -9,35 +9,33 @@ Starter code for exercise 2.
 // Setting canvas color
 var canvasColor;
 
-// The position and size of our avatar circle
+// The position and size of our Arnold Schwarzenegger
 var avatarX;
 var avatarY;
-var avatarSize = 50;
+var avatarSize = 100;
 
 // Create new avater with Arnold Schwarzenegger
 var avatarImage;
 var avatarImageSize = 20;
-// How much avatar size decreases with each dodge
 
-
-// The speed and velocity of our avatar circle
+// The speed and velocity of our avatar Arnold
 var avatarSpeed = 10;
 var avatarVX = 0;
 var avatarVY = 0;
 
-// The position and size of the enemy
+// The position and size of the enemy Beyonce
 var enemyX;
 var enemyY;
-var enemySize = 50;
-// How much bigger the enemy circle gets with each successful dodge
-var enemySizeIncrease = 5;
+var enemySize = 100;
+// How much bigger the enemy Beyonce gets with each successful dodge
+var enemySizeIncrease = 20;
 // The enemy Beyonce Pizza image
 var enemyImage;
 
-// The speed and velocity of our enemy circle
+// The speed and velocity of our enemy Beyonce
 var enemySpeed = 5;
 var enemyVX = 5;
-// How much bigger the enemy circle gets with each successful dodge
+// How much bigger the enemy Beyonce gets with each successful dodge
 var enemySpeedIncrease = 0.5;
 
 // How many dodges the player has made
@@ -49,7 +47,7 @@ function preload() {
   fontRegular = loadFont('assets/fonts/cubicblock_s.ttf');
   enemyImage = loadImage("assets/images/enemy.png");
   avatarImage = loadImage("assets/images/avatar.png");
-   }
+}
 
 // setup()
 //
@@ -64,7 +62,7 @@ function setup() {
   avatarY = height/0;
 
   // Size of avatar changes randomly
-  avatarSize = random 
+  // avatarSize = random;
 
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
@@ -72,8 +70,6 @@ function setup() {
 
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
-
-
 
   // No stroke so it looks cleaner
   noStroke();
@@ -87,7 +83,7 @@ function setup() {
 // game over situations.
 function draw() {
   // A yellow background
-  // Change Pippin's background to
+  // Change Pippin's background to ...
   background(canvasColor);
   if (enemyX > width/1.5) {
     canvasColor = color(255,0,0);
@@ -102,9 +98,9 @@ function draw() {
   textFont(fontRegular)
 
   // The enemy is Beyonce Pizza
-  image(enemyImage,enemyX,enemyY);
+  image(enemyImage,enemyX,enemyY,enemySize,enemySize);
   // The avatar is Arnold Schwarzenegger
-  image(avatarImage,avatarX,avatarY);
+  image(avatarImage,avatarX,avatarY,avatarSize,avatarSize);
 
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
@@ -152,7 +148,7 @@ function draw() {
     enemyX = 0;
     enemyY = random(0,height);
     // Reset the enemy's size and speed
-    enemySize = 50;
+    enemySize = 75;
     enemySpeed = 5;
     // Reset the avatar's position
     avatarX = width/2;
@@ -167,7 +163,7 @@ function draw() {
     console.log("YOU LOSE!");
     enemyX = 0;
     enemyY = random(0,height);
-    enemySize = 50;
+    enemySize = 150;
     enemySpeed = 5;
     avatarX = width/2;
     avatarY = height/2;
