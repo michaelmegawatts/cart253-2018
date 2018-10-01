@@ -1,6 +1,6 @@
 /******************************************************************************
 Where's Sausage Dog?
-by Pippin Barr
+by Pippin Barr as interpreted by Michael Watts
 
 An algorithmic version of a Where's Wally searching game where you
 need to click on the sausage dog you're searching for in amongst all
@@ -13,7 +13,7 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 // Position and image of the sausage dog we're searching for
 var targetX;
 var targetY;
-var targetImage;
+var targetImage
 
 // The ten decoy images
 var decoyImage1;
@@ -108,6 +108,14 @@ function setup() {
   targetY = random(0,height);
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
+
+  // Display Sausage dog on square in top right corner at all times //
+  noStroke();
+  fill(255,255,255);
+  rect(0, 0, 200, 150);
+
+
+
 }
 
 function draw() {
