@@ -13,7 +13,7 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 // Position and image of the sausage dog we're searching for
 var targetX;
 var targetY;
-var targetImage
+var targetImage;
 
 // The ten decoy images
 var decoyImage1;
@@ -33,6 +33,7 @@ var numDecoys = 100;
 
 // Keep track of whether they've won
 var gameOver = false;
+
 
 // preload()
 //
@@ -106,14 +107,22 @@ function setup() {
   // Once we've displayed all decoys, we choose a location for the target
   targetX = random(0,width);
   targetY = random(0,height);
+
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
   // Display Sausage dog on square in top right corner at all times //
   noStroke();
-  fill(255,255,255);
+  fill(255,0,0);
   rect(0, 0, 200, 150);
+  image(targetImage, 80, 80);
 
+  // Target text with image displaye
+  textAlign(LEFT, TOP);
+  var lostSausage = "Lost Sausage, meow!";
+  fill(0, 0, 0);
+  textSize(15);
+  text(lostSausage, 30, 25);
 
 
 }
@@ -133,6 +142,9 @@ function draw() {
     stroke(random(255));
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+
+
+
   }
 }
 
