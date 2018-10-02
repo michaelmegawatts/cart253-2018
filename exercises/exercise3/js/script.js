@@ -111,20 +111,21 @@ function setup() {
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
-  // Display Sausage dog on square in top right corner at all times //
+  // Create variable to display Sausage dog on rectangle top right corner at all times //
   // I've added Sausage dog details here //
   noStroke();
   fill(255,0,0);
-  rect(0, 0, 200, 150);
-  image(targetImage, 80, 80);
+  var rectX = width-200;
+  rect (rectX, 0, 200, 150);
+  image(targetImage, rectX+80, 80);
 
-  // Target text typography with image displayed //
+  // Added Target text and changed typography with image displayed in rectangle //
   textFont("Georgia");
   textAlign(LEFT, TOP);
   var lostSausage = "Lost Sausage, meow!";
   fill(0, 0, 0);
   textSize(17);
-  text(lostSausage, 30, 20);
+  text(lostSausage, rectX+10, 20);
 }
 
 function draw() {
