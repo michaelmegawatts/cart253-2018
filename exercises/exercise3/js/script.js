@@ -108,10 +108,11 @@ function setup() {
   targetX = random(0,width);
   targetY = random(0,height);
 
+
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
-  // Create variable to display Sausage dog on rectangle top right corner at all times //
+  // Create rect variable to display Sausage dog on rectangle top right corner at all times //
   // I've added Sausage dog details here //
   noStroke();
   fill(255,0,0);
@@ -144,8 +145,11 @@ function draw() {
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
 
-
-
+    // Generate a random loop if this condition is not true for the target image//
+    while (targetX > rectX || targetY < 150) {
+      targetX = random (0,width);
+      targetY = ramdom (0,height);
+    }
   }
 }
 
