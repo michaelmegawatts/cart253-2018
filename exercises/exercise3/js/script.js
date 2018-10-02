@@ -112,19 +112,19 @@ function setup() {
   image(targetImage,targetX,targetY);
 
   // Display Sausage dog on square in top right corner at all times //
+  // I've added Sausage dog details here //
   noStroke();
   fill(255,0,0);
   rect(0, 0, 200, 150);
   image(targetImage, 80, 80);
 
-  // Target text with image displaye
+  // Target text typography with image displayed //
+  textFont("Georgia");
   textAlign(LEFT, TOP);
   var lostSausage = "Lost Sausage, meow!";
   fill(0, 0, 0);
-  textSize(15);
-  text(lostSausage, 30, 25);
-
-
+  textSize(17);
+  text(lostSausage, 30, 20);
 }
 
 function draw() {
