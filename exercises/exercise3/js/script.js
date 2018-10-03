@@ -11,9 +11,15 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 ******************************************************************************/
 
 // Position and image of the sausage dog we're searching for
+// Size increase of Sausage dog and target for winning
 var targetX;
 var targetY;
 var targetImage;
+var targetSize = 500;
+var targetSizeIncrease = 20;
+
+// Target speed and velocity
+var targetSpeed = 10;
 
 // The ten decoy images
 var decoyImage1;
@@ -34,6 +40,8 @@ var numDecoys = 100;
 // Keep track of whether they've won
 var gameOver = false;
 
+// Rectangle exists in the game, top right corner, forever!
+var rectX = 0;
 
 // preload()
 //
@@ -112,11 +120,10 @@ function setup() {
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
-  // Create rect variable to display Sausage dog on rectangle top right corner at all times //
-  // I've added Sausage dog details here //
+  // Create rect to display Sausage dog on rectangle top right corner at all times //
   noStroke();
   fill(255,0,0);
-  var rectX = width-200;
+  rectX = width-200;
   rect (rectX, 0, 200, 150);
   image(targetImage, rectX+80, 80);
 
@@ -127,6 +134,7 @@ function setup() {
   fill(0, 0, 0);
   textSize(17);
   text(lostSausage, rectX+10, 20);
+
 }
 
 function draw() {
@@ -144,11 +152,17 @@ function draw() {
     stroke(random(255));
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    // Draw target Image so it can increase in size with ellipse when winned
+    image(targetImage,targetX,targetY,targetImage.width,targetImage.height);
+    targetImage.width = targetImage.width + targetSpeed;
+    targetImage.height = targetImage.height + targetSpeed;
+    targetSize = 150;
+    targetSize = targetSize + targetSizeIncrease;
 
     // Generate a random loop if this condition is not true for the target image//
     while (targetX > rectX || targetY < 150) {
       targetX = random (0,width);
-      targetY = ramdom (0,height);
+      targetY = random (0,height);
     }
   }
 }
