@@ -159,13 +159,13 @@ function draw() {
     targetImage.width = targetImage.width + targetSpeed;
     targetImage.height = targetImage.height + targetSpeed;
     targetSize = 150;
-    targetSize = targetSize + targetSizeIncrease;
+
 
     // Added a decrease in size of target Sausage so it doesn't go into infinity //
   if (targetImage.width && targetImage.height > windowWidth+300 && windowHeight+300){
     targetImage.width = -targetImage.width + targetSpeed;
     targetImage.height = -targetImage.height + targetSpeed;
-    targetSize = targetSize - targetSizeIncrease;
+
     }
 
     // Generate a random loop if this condition is not true for the target image //
