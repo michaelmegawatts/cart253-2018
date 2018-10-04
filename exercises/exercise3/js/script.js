@@ -42,13 +42,16 @@ var gameOver = false;
 
 // Rectangle exists in the game, top right corner, forever!
 var rectX = 0;
+var imgW;
+var imgH;
 
 // preload()
 //
 // Loads the target and decoy images before the program starts
 function preload() {
   targetImage = loadImage("assets/images/animals-target.png");
-
+  imgW = targetImage.width;
+  imgH = targetImage.height;
   decoyImage1 = loadImage("assets/images/animals-01.png");
   decoyImage2 = loadImage("assets/images/animals-02.png");
   decoyImage3 = loadImage("assets/images/animals-03.png");
@@ -152,27 +155,47 @@ function draw() {
 
     noFill();
     stroke(random(255));
-    strokeWeight(10);
+    strokeWeight(20);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    //ellipse(targetX,targetY,imgW,imgH);
     // Draw target Image so it can increase in size with ellipse when winned //
     image(targetImage,targetX,targetY,targetImage.width,targetImage.height);
+    //image(targetImage,targetX,targetY,imgW,imgH);
     targetImage.width = targetImage.width + targetSpeed;
     targetImage.height = targetImage.height + targetSpeed;
-    targetSize = 150;
+    //targetSize = 150;
 
 
     // Added a decrease in size of target Sausage so it doesn't go into infinity //
-  if (targetImage.width && targetImage.height > windowWidth+300 && windowHeight+300){
+  /*if (imgW > windowWidth + 300 && imgH > windowHeight + 300){
+    targetSpeed = -targetSpeed;
+  } else if (imgW < 0 && imgH < 0 )  {
+    targetSpeed = -targetSpeed;
+  }
+
+  imgW = imgW + targetSpeed;
+  imgH = imgH + targetSpeed;*/
+
+
+
+  /*if (targetImage.width > windowWidth+300 && targetImage.height > windowHeight+300){
+    targetSpeed = -targetSpeed;
+  }else if(targetImage.width < 0 && targetImage.height < 0) {
+    targetSpeed = -targetSpeed;
+  }*/
+
+  targetImage.width = targetImage.width + targetSpeed;
+  targetImage.height = targetImage.height + targetSpeed;
+
+  if (targetImage.width > windowWidth+300 && targetImage.height > windowHeight+300){
     targetImage.width = -targetImage.width + targetSpeed;
     targetImage.height = -targetImage.height + targetSpeed;
-
-    }
+  }
 
     // Generate a random loop if this condition is not true for the target image //
     while (targetX > rectX || targetY < 150) {
       targetX = random (0,width);
       targetY = random (0,height);
-
     }
   }
 }
