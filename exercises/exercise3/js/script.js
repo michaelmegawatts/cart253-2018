@@ -170,6 +170,10 @@ function draw() {
     while (targetX > rectX || targetY < 150) {
       targetX = random (0,width);
       targetY = random (0,height);
+
+    // Setting some decoy images to random sizes when game is refreshed //
+    
+
     }
   }
 }
