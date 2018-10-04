@@ -11,7 +11,7 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 ******************************************************************************/
 
 // Position and image of the sausage dog we're searching for
-// Size increase of Sausage dog and target for winning
+// Size increase of Sausage dog and target for winning //
 var targetX;
 var targetY;
 var targetImage;
@@ -19,7 +19,7 @@ var targetSize = 500;
 var targetSizeIncrease = 20;
 
 // Target speed and velocity
-var targetSpeed = 10;
+var targetSpeed = 20;
 
 // The ten decoy images
 var decoyImage1;
@@ -152,14 +152,21 @@ function draw() {
     stroke(random(255));
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
-    // Draw target Image so it can increase in size with ellipse when winned
+    // Draw target Image so it can increase in size with ellipse when winned //
     image(targetImage,targetX,targetY,targetImage.width,targetImage.height);
     targetImage.width = targetImage.width + targetSpeed;
     targetImage.height = targetImage.height + targetSpeed;
     targetSize = 150;
     targetSize = targetSize + targetSizeIncrease;
 
-    // Generate a random loop if this condition is not true for the target image//
+    // Added a decrease in size of target Sausage so it doesn't go into infinity //
+  if (targetImage.width && targetImage.height > windowWidth+300 && windowHeight+300){
+    targetImage.width = -targetImage.width + targetSpeed;
+    targetImage.height = -targetImage.height + targetSpeed;
+    targetSize = targetSize - targetSizeIncrease;
+    }
+
+    // Generate a random loop if this condition is not true for the target image //
     while (targetX > rectX || targetY < 150) {
       targetX = random (0,width);
       targetY = random (0,height);
