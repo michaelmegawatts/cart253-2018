@@ -44,6 +44,7 @@ var eatHealth = 10;
 // Number of prey eaten during the game
 var preyEaten = 0;
 
+
 // setup()
 //
 // Sets up the basic elements of the game
