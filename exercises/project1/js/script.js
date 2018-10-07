@@ -177,6 +177,15 @@ function movePlayer() {
 function updateHealth() {
   // Reduce player health, constrain to reasonable range
   playerHealth = constrain(playerHealth - 0.5,0,playerMaxHealth);
+
+// Created statement to reduce player health faster when shift is pressed //
+  if (keyIsDown(SHIFT)) {
+    (playerHealth = constrain(playerHealth - 3,0,playerMaxHealth));
+  }
+  else {
+    console.log(playerHealth = constrain(playerHealth + 1,0,playerMaxHealth));
+  }
+
   // Check if the player is dead
   if (playerHealth === 0) {
     // If so, the game is over
