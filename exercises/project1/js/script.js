@@ -133,6 +133,16 @@ function handleInput() {
   else {
     playerVY = 0;
   }
+
+  // Shift key makes player accelerate //
+  if (keyIsDown(SHIFT)) {
+    playerMaxSpeed = +10;
+  }
+  // bringing player speed back to normal //
+  else {
+    playerMaxSpeed = 2;
+  }
+
 }
 
 // movePlayer()
