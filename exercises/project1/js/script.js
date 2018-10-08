@@ -26,6 +26,13 @@ var playerMaxHealth = 255;
 // Player fill color
 var playerFill = 50;
 
+// adding variable for player size increaase //
+var playerSize = 300;
+var playerSizeIncrease = 20;
+
+var playerW;
+var playerH;
+
 // Prey position, size, velocity
 var preyX;
 var preyY;
@@ -79,6 +86,9 @@ function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
   playerHealth = playerMaxHealth;
+  //playerSize = playerX + playerY;
+  //playerSizeIncrease = playerSize + 10;
+
 }
 
 // draw()
@@ -142,7 +152,6 @@ function handleInput() {
   else {
     playerMaxSpeed = 2;
   }
-
 }
 
 // movePlayer()
@@ -183,7 +192,7 @@ function updateHealth() {
     (playerHealth = constrain(playerHealth - 3,0,playerMaxHealth));
   }
   else {
-    console.log(playerHealth = constrain(playerHealth + 1,0,playerMaxHealth));
+    (playerHealth = constrain(playerHealth + 1,0,playerMaxHealth));
   }
 
   // Check if the player is dead
@@ -216,6 +225,10 @@ function checkEating() {
       // Track how many prey were eaten
       preyEaten++;
     }
+    if (d < playerRadius + preyRadius) {
+      // Increase the player size //
+      console.log(playerSize = playerSize + (playerX,playerY,playerRadius*2));
+      }
   }
 }
 
@@ -275,6 +288,10 @@ function drawPrey() {
 function drawPlayer() {
   fill(playerFill,playerHealth);
   ellipse(playerX,playerY,playerRadius*2);
+  playerSize = playerSize + 10;
+
+
+
 }
 
 // showGameOver()
