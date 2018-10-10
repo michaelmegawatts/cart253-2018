@@ -25,7 +25,7 @@ var playerMaxSpeed = 2;
 var playerHealth;
 var playerMaxHealth = 255;
 // Player fill color
-var playerFill = 50;
+var playerFill = 300;
 
 
 // Prey position, size, velocity
@@ -39,7 +39,7 @@ var preyMaxSpeed = 4;
 var preyHealth;
 var preyMaxHealth = 100;
 // Prey fill color
-var preyFill = 200;
+var preyFill = 300;
 
 // Amount of health obtained per frame of "eating" the prey
 var eatHealth = 10;
@@ -82,6 +82,7 @@ function setupPlayer() {
   playerY = height/2;
   playerHealth = playerMaxHealth;
 
+
 }
 
 // draw()
@@ -92,7 +93,7 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100,100,200);
+  background(230,255,255);
 
   if (!gameOver) {
     handleInput();
@@ -235,7 +236,7 @@ function checkEating() {
       playerRadius = playerRadius - 0.05;
   }
   // when player reaches certain size it begins to lose health
-  if (playerRadius > playerRadiusMax - 50) {
+  if (playerRadius > playerRadiusMax - 20) {
     console.log(playerHealth = playerHealth - .25);
 
   }
@@ -287,16 +288,18 @@ function movePrey() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(preyFill,preyHealth);
+  fill(255, 255, 0,preyFill,preyHealth);
   ellipse(preyX,preyY,preyRadius*2);
+
 }
 
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha based on health
 function drawPlayer() {
-  fill(playerFill,playerHealth);
+  fill(255, 0, 0,playerFill,playerHealth);
   ellipse(playerX,playerY,playerRadius*2);
+
 
 }
 
