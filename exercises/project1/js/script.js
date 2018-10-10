@@ -26,12 +26,6 @@ var playerMaxHealth = 255;
 // Player fill color
 var playerFill = 50;
 
-// adding variable for player size increaase //
-var playerSize = 300;
-var playerSizeIncrease = 20;
-
-var playerW;
-var playerH;
 
 // Prey position, size, velocity
 var preyX;
@@ -86,8 +80,6 @@ function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
   playerHealth = playerMaxHealth;
-  //playerSize = playerX + playerY;
-  //playerSizeIncrease = playerSize + 10;
 
 }
 
@@ -225,11 +217,14 @@ function checkEating() {
       // Track how many prey were eaten
       preyEaten++;
     }
-    if (d < playerRadius + preyRadius) {
-      // Increase the player size //
-      console.log(playerSize = playerSize + (playerX,playerY,playerRadius*2));
-      }
+    // increase player size when it eats prey //
+      console.log(playerRadius = playerRadius + 0.3);
   }
+
+  else  {
+    // decrease the player size when it's not eating //
+    console.log(playerRadius = playerRadius - 0.01);
+    }
 }
 
 // movePrey()
@@ -288,9 +283,6 @@ function drawPrey() {
 function drawPlayer() {
   fill(playerFill,playerHealth);
   ellipse(playerX,playerY,playerRadius*2);
-  playerSize = playerSize + 10;
-
-
 
 }
 
