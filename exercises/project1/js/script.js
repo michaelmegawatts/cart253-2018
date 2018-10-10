@@ -17,6 +17,7 @@ var gameOver = false;
 var playerX;
 var playerY;
 var playerRadius = 30;
+var playerRadiusMax = 200;
 var playerVX = 0;
 var playerVY = 0;
 var playerMaxSpeed = 2;
@@ -177,13 +178,14 @@ function movePlayer() {
 // Check if the player is dead
 function updateHealth() {
   // Reduce player health, constrain to reasonable range
-  playerHealth = constrain(playerHealth - 0.5,0,playerMaxHealth);
+  //playerHealth = constrain(playerHealth - 0.5,0,playerMaxHealth);
 
 // Created statement to reduce player health faster when shift is pressed //
   if (keyIsDown(SHIFT)) {
     (playerHealth = constrain(playerHealth - 3,0,playerMaxHealth));
   }
-  else {
+  // warning sign for player when player eats too much, it loses its health //
+  else if (playerRadius < playerRadiusMax -50) {
     (playerHealth = constrain(playerHealth + 1,0,playerMaxHealth));
   }
 
@@ -192,7 +194,12 @@ function updateHealth() {
     // If so, the game is over
     gameOver = true;
   }
+  // if player radius reaches 0 player is dead //
+  if (playerRadius < 0) {
+    console.log(gameOver = true);
+  }
 }
+
 
 // checkEating()
 //
@@ -200,10 +207,13 @@ function updateHealth() {
 function checkEating() {
   // Get distance of player to prey
   var d = dist(playerX,playerY,preyX,preyY);
+  // limit the size of the player radius, playerRadiusMax //
+  playerRadius = constrain(playerRadius, -.05, playerRadiusMax);
+
   // Check if it's an overlap
   if (d < playerRadius + preyRadius) {
     // Increase the player health
-    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
+    //playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
     // Reduce the prey health
     preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
 
@@ -218,13 +228,17 @@ function checkEating() {
       preyEaten++;
     }
     // increase player size when it eats prey //
-      console.log(playerRadius = playerRadius + 0.3);
+      playerRadius = playerRadius + 0.3;
   }
-
   else  {
     // decrease the player size when it's not eating //
-    console.log(playerRadius = playerRadius - 0.01);
-    }
+      playerRadius = playerRadius - 0.05;
+  }
+  // when player reaches certain size it begins to lose health
+  if (playerRadius > playerRadiusMax - 50) {
+    console.log(playerHealth = playerHealth - .25);
+
+  }
 }
 
 // movePrey()
@@ -234,7 +248,7 @@ function movePrey() {
   preyX = width * noise(tx);
   preyY = height * noise(ty);
 
-  tx += .01;
+  tx += .02;
   ty += .03;
 
   // Change the prey's velocity at random intervals
