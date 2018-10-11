@@ -17,6 +17,7 @@ var gameOver = false;
 var playerX;
 var playerY;
 var playerRadius = 30;
+// changed player max radius //
 var playerRadiusMax = 200;
 var playerVX = 0;
 var playerVY = 0;
@@ -34,9 +35,11 @@ var preyY;
 var preyRadius = 25;
 var preyVX;
 var preyVY;
-var preyMaxSpeed = 4;
+// changed max speed value //
+var preyMaxSpeed = 9;
 // Prey health
 var preyHealth;
+// changed max health value //
 var preyMaxHealth = 255;
 // Prey fill color
 var preyFill = 300;
@@ -46,21 +49,24 @@ var eatHealth = 10;
 // Number of prey eaten during the game
 var preyEaten = 0;
 
- // Created t (time) variable for Prey to move with noise function //
+// Created t (time) variable for Prey to move with noise function //
 var t = 0;
 var tx = 0;
 var ty = 0;
 
-// variable for sound of player //
+// variable for sound of player when alive and when dead //
 var chime;
+var heartbeat;
 
-// variable for image background //
+// variable for sky background //
 var sky;
 
 // preload chime sound, preload sky image //
 function preload() {
   chime = new Audio("assets/sounds/chime.mp3");
+  heartbeat = new Audio("assets/sounds/heartbeat.mp3");
   sky = loadImage("assets/images/sky.png");
+  fontFinal = loadFont('assets/fonts/Megrim.ttf');
 }
 // setup()
 //
@@ -72,7 +78,8 @@ function setup() {
 
   setupPrey();
   setupPlayer();
-
+// heartbeat of player starts at beginning of game //
+  heartbeat.play();
 }
 
 // setupPrey()
@@ -93,8 +100,6 @@ function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
   playerHealth = playerMaxHealth;
-
-
 }
 
 // draw()
@@ -196,7 +201,7 @@ function updateHealth() {
 
 // Created statement to reduce player health faster when shift is pressed //
   if (keyIsDown(SHIFT)) {
-    (playerHealth = constrain(playerHealth - 3,0,playerMaxHealth));
+    (playerHealth = constrain(playerHealth - 1,0,playerMaxHealth));
   }
   // warning sign for player when player eats too much, it loses its health //
   else if (playerRadius > playerRadiusMax -50) {
@@ -207,15 +212,17 @@ function updateHealth() {
   if (playerHealth === 0) {
     // If so, the game is over
     gameOver = true;
-    // setup chime sound //
+    // chime sound when player loses all its health //
     chime.play();
   }
   // if player radius reaches 0 player is dead //
   if (playerRadius <= 0) {
     gameOver = true;
+  // heartbeat stops when player dies, chime begins when player reaches 0 size ÉÉ
+    heartbeat.pause();
+    chime.play();
   }
 }
-
 
 // checkEating()
 //
@@ -248,7 +255,7 @@ function checkEating() {
   }
   else  {
     // decrease the player size when it's not eating //
-      playerRadius = playerRadius - 0.05;
+      playerRadius = playerRadius - 0.01;
   }
   // when player reaches certain size it begins to lose health //
   //if (playerRadius > playerRadiusMax - 20) {
@@ -260,11 +267,9 @@ function checkEating() {
 //
 // Moves the prey using the noise function
 function movePrey() {
-  preyX = width * noise(tx);
-  preyY = height * noise(ty);
-
-  tx += .02;
-  ty += .03;
+// adjust values for effects with noise function //
+  tx += .05;
+  ty += .02;
 
   // Change the prey's velocity at random intervals
   // random() will be < 0.05 5% of the time, so the prey
@@ -274,8 +279,9 @@ function movePrey() {
     // and speed of movement
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
-    preyVX = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
-    preyVY = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
+  // changed random with noise function //
+    preyVX = map(noise(tx),0,1,-preyMaxSpeed,preyMaxSpeed);
+    preyVY = map(noise(ty),0,1,-preyMaxSpeed,preyMaxSpeed);
   }
 
   // Update prey position based on velocity
@@ -306,7 +312,6 @@ function drawPrey() {
   fill(255, 255, 0,preyHealth);
   ellipse(preyX,preyY,preyRadius*2);
   stroke(255, 0, 0,);
-
 }
 
 // drawPlayer()
@@ -316,19 +321,20 @@ function drawPlayer() {
   // changed color of player //
   fill(255, 0, 0,playerHealth);
   ellipse(playerX,playerY,playerRadius*2);
-
-
 }
 
 // showGameOver()
 //
 // Display text about the game being over!
+// changed text size, font, spacing in text, color //
 function showGameOver() {
-  textSize(32);
+  textSize(60);
   textAlign(CENTER,CENTER);
   fill(0);
-  var gameOverText = "GAME OVER\n";
-  gameOverText += "You ate " + preyEaten + " prey\n";
+  textFont(fontFinal);
+  var gameOverText = " g a m e  o v e r \n";
+  gameOverText += " you ate  ";
+  gameOverText += preyEaten + "  prey\n";
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
 
