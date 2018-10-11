@@ -37,7 +37,7 @@ var preyVY;
 var preyMaxSpeed = 4;
 // Prey health
 var preyHealth;
-var preyMaxHealth = 100;
+var preyMaxHealth = 255;
 // Prey fill color
 var preyFill = 300;
 
@@ -51,6 +51,17 @@ var t = 0;
 var tx = 0;
 var ty = 0;
 
+// variable for sound of player //
+var chime;
+
+// variable for image background //
+var sky;
+
+// preload chime sound, preload sky image //
+function preload() {
+  chime = new Audio("assets/sounds/chime.mp3");
+  sky = loadImage("assets/images/sky.png");
+}
 // setup()
 //
 // Sets up the basic elements of the game
@@ -61,6 +72,7 @@ function setup() {
 
   setupPrey();
   setupPlayer();
+
 }
 
 // setupPrey()
@@ -93,7 +105,8 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(230,255,255);
+// added sky image as background //
+    image(sky, 0,0,500,500);
 
   if (!gameOver) {
     handleInput();
@@ -186,18 +199,20 @@ function updateHealth() {
     (playerHealth = constrain(playerHealth - 3,0,playerMaxHealth));
   }
   // warning sign for player when player eats too much, it loses its health //
-  else if (playerRadius < playerRadiusMax -50) {
-    (playerHealth = constrain(playerHealth + 1,0,playerMaxHealth));
+  else if (playerRadius > playerRadiusMax -50) {
+    (playerHealth = constrain(playerHealth - 1,0,playerMaxHealth));
   }
 
   // Check if the player is dead
   if (playerHealth === 0) {
     // If so, the game is over
     gameOver = true;
+    // setup chime sound //
+    chime.play();
   }
   // if player radius reaches 0 player is dead //
-  if (playerRadius < 0) {
-    console.log(gameOver = true);
+  if (playerRadius <= 0) {
+    gameOver = true;
   }
 }
 
@@ -235,11 +250,10 @@ function checkEating() {
     // decrease the player size when it's not eating //
       playerRadius = playerRadius - 0.05;
   }
-  // when player reaches certain size it begins to lose health
-  if (playerRadius > playerRadiusMax - 20) {
-    console.log(playerHealth = playerHealth - .25);
-
-  }
+  // when player reaches certain size it begins to lose health //
+  //if (playerRadius > playerRadiusMax - 20) {
+    //playerHealth = playerHealth - .25;
+  //}
 }
 
 // movePrey()
@@ -255,14 +269,14 @@ function movePrey() {
   // Change the prey's velocity at random intervals
   // random() will be < 0.05 5% of the time, so the prey
   // will change direction on 5% of frames
-  //if (random() < 0.05) {
+  if (random() < 0.05) {
     // Set velocity based on random values to get a new direction
     // and speed of movement
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
-    //preyVX = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
-    //preyVY = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
-  //}
+    preyVX = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
+    preyVY = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
+  }
 
   // Update prey position based on velocity
   preyX += preyVX;
@@ -288,8 +302,10 @@ function movePrey() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(255, 255, 0,preyFill,preyHealth);
+// changed color of prey //
+  fill(255, 255, 0,preyHealth);
   ellipse(preyX,preyY,preyRadius*2);
+  stroke(255, 0, 0,);
 
 }
 
@@ -297,7 +313,8 @@ function drawPrey() {
 //
 // Draw the player as an ellipse with alpha based on health
 function drawPlayer() {
-  fill(255, 0, 0,playerFill,playerHealth);
+  // changed color of player //
+  fill(255, 0, 0,playerHealth);
   ellipse(playerX,playerY,playerRadius*2);
 
 
@@ -314,4 +331,5 @@ function showGameOver() {
   gameOverText += "You ate " + preyEaten + " prey\n";
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
-}
+
+  }
