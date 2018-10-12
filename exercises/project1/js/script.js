@@ -79,6 +79,7 @@ function setup() {
   setupPrey();
   setupPlayer();
 // heartbeat of player starts at beginning of game //
+// heartbeat of player starts at beginning of game, and loops //
   heartbeat.play();
   heartbeat.loop = true;
 
