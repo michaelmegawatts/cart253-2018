@@ -41,7 +41,9 @@ var leftPaddle = {
   upKeyCode: 87, // The key code for W
   downKeyCode: 83, // The key code for S
   ///////// NEW /////////
-  score: 0
+  // added properties for score and color //
+  score: 0,
+  color: 255,
   ///////// END NEW /////////
 }
 
@@ -60,7 +62,9 @@ var rightPaddle = {
   upKeyCode: 38, // The key code for the UP ARROW
   downKeyCode: 40, // The key code for the DOWN ARROW
   ///////// NEW /////////
-  score: 0
+  // added properties for score and color //
+  score: 0,
+  color: 255
   ///////// END NEW /////////
 }
 
@@ -106,6 +110,12 @@ function setupPaddles() {
   // Initialise the right paddle
   rightPaddle.x = width - paddleInset;
   rightPaddle.y = height/2;
+
+  /////// NEW //////////
+  //setup for colors of paddles //
+  leftPaddle.color = color(255,0,0);
+  rightPaddle.color = color(0,0,255);
+  /////////// END NEW /////////
 }
 
 // setupBall()
@@ -124,10 +134,7 @@ function setupBall() {
 function draw() {
   // Fill the background
   background(bgColor);
-///////// NEW /////////
-// reset color for paddles and ball
-  fill(255);
-///////// END NEW /////////
+
   // Handle input
   // Notice how we're using the SAME FUNCTION to handle the input
   // for the two paddles!
@@ -146,6 +153,11 @@ function draw() {
   handleBallPaddleCollision(leftPaddle);
   handleBallPaddleCollision(rightPaddle);
 
+  ///////// NEW /////////
+  // will change color of paddle for every score //
+  paddleScoreColor();
+  ///////// END NEW ///////
+
   // Handle the ball going off screen
   handleBallOffScreen();
 
@@ -155,13 +167,14 @@ function draw() {
   displayBall();
 
 ///////// NEW /////////
-// created text to keep score //
+// created text to keep score, and color of text //
   fill(255, 192, 203);
   textSize(100);
   text(leftPaddle.score,width/2 -75, 10);
   text(rightPaddle.score,width/2 +75, 10);
   textAlign(CENTER,CENTER);
   textFont(fontRegular);
+  fill(255);
 ///////// END NEW /////////
 }
 
@@ -297,13 +310,33 @@ function handleBallOffScreen() {
   }
 /////////END NEW////////
 }
+///////// NEW////////
+function paddleScoreColor() {
+  // Created function to change color of paddles for the score
+  // Calculate edges of ball for clearer if statement below
+  var ballLeft = ball.x - ball.size/2;
+  var ballRight = ball.x + ball.size/2;
 
+  if (ballRight < 0) {
+    var b = blue (rightPaddle.color);
+    b = b - 10;
+    rightPaddle.color.setBlue(b);
+    }
 
+  if (ballLeft > width) {
+    var r = red (leftPaddle.color);
+    console.log(r = r - 10);
+
+    leftPaddle.color.setRed(r);
+    }
+}
+/////////END NEW////////
 
 // displayBall()
 //
 // Draws ball on screen based on its properties
 function displayBall() {
+  fill(255,255,0);
   rect(ball.x,ball.y,ball.size,ball.size);
 }
 
@@ -311,5 +344,9 @@ function displayBall() {
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
+////////// NEW //////////
+// color for paddle //
+  fill(paddle.color);
+/////////// END NEW //////////
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
 }
