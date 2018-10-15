@@ -20,6 +20,10 @@ var ball = {
   vy: 0,
   speed: 5
 }
+///////// NEW /////////
+var leftPaddleScore = 0;
+var rightPaddleScore = 0;
+///////// END NEW /////////
 
 // PADDLES
 
@@ -44,7 +48,7 @@ var leftPaddle = {
 
 // RIGHT PADDLE
 
-// Basic definition of a left paddle object with its key properties of
+// Basic definition of a right paddle object with its key properties of
 // position, size, velocity, and speed
 var rightPaddle = {
   x: 0,
@@ -66,6 +70,9 @@ var beepSFX;
 // Loads the beep audio for the sound of bouncing
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+  ///////// NEW /////////
+  fontRegular = loadFont('assets/fonts/cubicblock.ttf');
+  ///////// END NEW /////////
 }
 
 // setup()
@@ -82,6 +89,7 @@ function setup() {
 
   setupPaddles();
   setupBall();
+
 }
 
 // setupPaddles()
@@ -113,7 +121,10 @@ function setupBall() {
 function draw() {
   // Fill the background
   background(bgColor);
-
+///////// NEW /////////
+// reset color for paddles and ball
+  fill(255);
+///////// END NEW /////////
   // Handle input
   // Notice how we're using the SAME FUNCTION to handle the input
   // for the two paddles!
@@ -139,6 +150,16 @@ function draw() {
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
+
+///////// NEW /////////
+// created text to keep score //
+  fill(255, 192, 203);
+  textSize(100);
+  text(leftPaddleScore,width/2 -75, 10);
+  text(rightPaddleScore,width/2 +75, 10);
+  textAlign(CENTER,CENTER);
+  textFont(fontRegular);
+///////// END NEW /////////
 }
 
 
@@ -262,6 +283,17 @@ function handleBallOffScreen() {
     // position is reset.
     // This is where we would count points etc!
   }
+//////////NEW//////////
+// function to calculating score for left and right paddle //
+  if (ballRight < 0) {
+    rightPaddleScore = rightPaddleScore +1;
+  }
+
+  if (ballLeft > width) {
+    leftPaddleScore = leftPaddleScore +1;
+  }
+/////////END NEW////////
+
 }
 
 // displayBall()
