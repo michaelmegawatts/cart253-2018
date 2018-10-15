@@ -20,10 +20,6 @@ var ball = {
   vy: 0,
   speed: 5
 }
-///////// NEW /////////
-var leftPaddleScore = 0;
-var rightPaddleScore = 0;
-///////// END NEW /////////
 
 // PADDLES
 
@@ -43,7 +39,10 @@ var leftPaddle = {
   vy: 0,
   speed: 5,
   upKeyCode: 87, // The key code for W
-  downKeyCode: 83 // The key code for S
+  downKeyCode: 83, // The key code for S
+  ///////// NEW /////////
+  score: 0
+  ///////// END NEW /////////
 }
 
 // RIGHT PADDLE
@@ -59,8 +58,12 @@ var rightPaddle = {
   vy: 0,
   speed: 5,
   upKeyCode: 38, // The key code for the UP ARROW
-  downKeyCode: 40 // The key code for the DOWN ARROW
+  downKeyCode: 40, // The key code for the DOWN ARROW
+  ///////// NEW /////////
+  score: 0
+  ///////// END NEW /////////
 }
+
 
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
@@ -155,8 +158,8 @@ function draw() {
 // created text to keep score //
   fill(255, 192, 203);
   textSize(100);
-  text(leftPaddleScore,width/2 -75, 10);
-  text(rightPaddleScore,width/2 +75, 10);
+  text(leftPaddle.score,width/2 -75, 10);
+  text(rightPaddle.score,width/2 +75, 10);
   textAlign(CENTER,CENTER);
   textFont(fontRegular);
 ///////// END NEW /////////
@@ -286,15 +289,16 @@ function handleBallOffScreen() {
 //////////NEW//////////
 // function to calculating score for left and right paddle //
   if (ballRight < 0) {
-    rightPaddleScore = rightPaddleScore +1;
+    rightPaddle.score = rightPaddle.score +1;
   }
 
   if (ballLeft > width) {
-    leftPaddleScore = leftPaddleScore +1;
+    leftPaddle.score = leftPaddle.score +1;
   }
 /////////END NEW////////
-
 }
+
+
 
 // displayBall()
 //
