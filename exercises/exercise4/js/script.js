@@ -78,6 +78,8 @@ var beepSFX;
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
   ///////// NEW /////////
+  ballRightSFX = new Audio("assets/sounds/shotgun.wav")
+  ballLeftSFX = new Audio("assets/sounds/laser.wav")
   fontRegular = loadFont('assets/fonts/cubicblock.ttf');
   ///////// END NEW /////////
 }
@@ -312,12 +314,13 @@ function handleBallOffScreen() {
 /////////END NEW////////
 
 //////////NEW//////////
-// function to calculating score for left and right paddle //
+// created random velocity for game reset and have the ball launch towards recent point  //
   if (ballRight < 0) {
     ball.x = 10;
     ball.y = height-15;
     ball.vx = random(10);
     ball.vy = random(10);
+    ballRightSFX.play();
   }
 
   if (ballLeft > width) {
@@ -325,6 +328,7 @@ function handleBallOffScreen() {
     ball.y = 15;
     ball.vx = random(-11);
     ball.vy = random(-10);
+    ballLeftSFX.play();
   }
 /////////END NEW////////
 
