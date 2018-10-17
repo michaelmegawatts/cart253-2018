@@ -294,6 +294,7 @@ function handleBallOffScreen() {
     // If it went off either side, reset it to the centre
     ball.x = width/2;
     ball.y = height/2;
+
     // NOTE that we don't change its velocity here so it just
     // carries on moving with the same velocity after its
     // position is reset.
@@ -309,6 +310,24 @@ function handleBallOffScreen() {
     leftPaddle.score = leftPaddle.score +1;
   }
 /////////END NEW////////
+
+//////////NEW//////////
+// function to calculating score for left and right paddle //
+  if (ballRight < 0) {
+    ball.x = 10;
+    ball.y = height-15;
+    ball.vx = random(10);
+    ball.vy = random(10);
+  }
+
+  if (ballLeft > width) {
+    ball.x = width;
+    ball.y = 15;
+    ball.vx = random(-11);
+    ball.vy = random(-10);
+  }
+/////////END NEW////////
+
 }
 ///////// NEW////////
 function paddleScoreColor() {
