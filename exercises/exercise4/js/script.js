@@ -294,9 +294,9 @@ function handleBallOffScreen() {
   // Check for ball going off the sides
   if (ballRight < 0 || ballLeft > width) {
     // If it went off either side, reset it to the centre
-    ball.x = width/2;
-    ball.y = height/2;
-
+    //ball.x = width/2;
+    //ball.y = height/2;
+    reset(ballRight,ballLeft);
     // NOTE that we don't change its velocity here so it just
     // carries on moving with the same velocity after its
     // position is reset.
@@ -311,9 +311,12 @@ function handleBallOffScreen() {
   if (ballLeft > width) {
     leftPaddle.score = leftPaddle.score +1;
   }
+}
 /////////END NEW////////
 
+
 //////////NEW//////////
+function reset(ballRight,ballLeft) {
 // created random velocity for game reset and have the ball launch towards recent point  //
   if (ballRight < 0) {
     ball.x = 10;
@@ -331,8 +334,8 @@ function handleBallOffScreen() {
     ballLeftSFX.play();
   }
 /////////END NEW////////
-
 }
+
 ///////// NEW////////
 function paddleScoreColor() {
   // Created function to change color of paddles for the score
