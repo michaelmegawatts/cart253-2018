@@ -60,9 +60,17 @@ Ball.prototype.update = function () {
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
   if (this.x + this.size < 0 ) {
+    this.x = 10;
+    this.y = random(0,480);
+    this.vx = random(10);
+    this.vy = random(10);
     return 1;
   }
-  else  if(this.x > width){
+  else if(this.x > width){
+    this.x = width;
+    this.y = random (0,480);
+    this.vx = random(-11);
+    this.vy = random(-10);
     return 2;
   }
   else {
