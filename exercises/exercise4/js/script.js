@@ -7,7 +7,6 @@
 // Game colors
 var bgColor = 0;
 var fgColor = 255;
-
 // BALL
 
 // Basic definition of a ball object with its key properties of
@@ -26,6 +25,8 @@ var ball = {
 // How far in from the walls the paddles should be drawn on x
 var paddleInset = 50;
 
+var imageLeft;
+var imageRight;
 // LEFT PADDLE
 
 // Basic definition of a left paddle object with its key properties of
@@ -81,7 +82,12 @@ function preload() {
   ballRightSFX = new Audio("assets/sounds/shotgun.wav")
   ballLeftSFX = new Audio("assets/sounds/laser.wav")
   fontRegular = loadFont('assets/fonts/cubicblock.ttf');
+<<<<<<< HEAD
   imageLeft = loadImage("assets/images/lmushroom.png");
+=======
+  imageRight = loadImage("assets/images/mushroomRight.png");
+  imageLeft = loadImage("assets/images/mushroomLeft.png");
+>>>>>>> b0580edd992010d7d23f7da62b95ecf138b4150f
   ///////// END NEW /////////
 }
 
@@ -170,8 +176,9 @@ function draw() {
   displayPaddle(rightPaddle);
   displayBall();
 
-///////// NEW /////////
-// created text to keep score, and color of text //
+  ///////// NEW /////////
+  // created text to keep score, and color of text
+  // added mushroom images //
   fill(255, 192, 203);
   textSize(100);
   text(leftPaddle.score,width/2 -75, 10);
@@ -179,9 +186,11 @@ function draw() {
   textAlign(CENTER,CENTER);
   textFont(fontRegular);
   fill(255);
-///////// END NEW /////////
-}
 
+  image(imageLeft,75,0,100,100);
+  image(imageRight,500,0,100,100);
+  ///////// END NEW /////////
+}
 
 // handleInput(paddle)
 //
@@ -257,7 +266,6 @@ function handleBallWallCollision() {
 // Checks if the ball overlaps the specified paddle and if so
 // reverses the ball's vx so it bounces
 function handleBallPaddleCollision(paddle) {
-
   // Calculate edges of ball for clearer if statements below
   var ballTop = ball.y - ball.size/2;
   var ballBottom = ball.y + ball.size/2;
@@ -296,16 +304,17 @@ function handleBallOffScreen() {
   // Check for ball going off the sides
   if (ballRight < 0 || ballLeft > width) {
     // If it went off either side, reset it to the centre
-    ball.x = width/2;
-    ball.y = height/2;
-
+    //////////NEW//////////
+    // created reset function for restart of ball play //
+    reset(ballRight,ballLeft);
+    ////////// END NEW //////////
     // NOTE that we don't change its velocity here so it just
     // carries on moving with the same velocity after its
     // position is reset.
     // This is where we would count points etc!
   }
-//////////NEW//////////
-// function to calculating score for left and right paddle //
+  //////////NEW//////////
+  // function to calculating score for left and right paddle //
   if (ballRight < 0) {
     rightPaddle.score = rightPaddle.score +1;
   }
@@ -313,10 +322,14 @@ function handleBallOffScreen() {
   if (ballLeft > width) {
     leftPaddle.score = leftPaddle.score +1;
   }
+}
+
 /////////END NEW////////
 
+
 //////////NEW//////////
-// created random velocity for game reset and have the ball launch towards recent point  //
+function reset(ballRight,ballLeft) {
+  // created random velocity for game reset and have the ball launch towards recent point  //
   if (ballRight < 0) {
     ball.x = 10;
     ball.y = height-15;
@@ -332,9 +345,9 @@ function handleBallOffScreen() {
     ball.vy = random(-10);
     ballLeftSFX.play();
   }
+}
 /////////END NEW////////
 
-}
 ///////// NEW////////
 function paddleScoreColor() {
   // Created function to change color of paddles for the score
@@ -346,14 +359,14 @@ function paddleScoreColor() {
     var b = blue (rightPaddle.color);
     b = b - 10;
     rightPaddle.color.setBlue(b);
-    }
+  }
 
   if (ballLeft > width) {
     var r = red (leftPaddle.color);
     console.log(r = r - 10);
 
     leftPaddle.color.setRed(r);
-    }
+  }
 }
 /////////END NEW////////
 
@@ -369,9 +382,9 @@ function displayBall() {
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
-////////// NEW //////////
-// color for paddle //
+  ////////// NEW //////////
+  // color for paddle //
   fill(paddle.color);
-/////////// END NEW //////////
+  /////////// END NEW //////////
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
 }
