@@ -42,13 +42,13 @@ Ball.prototype.update = function () {
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
 //Ball.prototype.isOffScreen = function () {
-  // Check for going off screen and reset if so
+// Check for going off screen and reset if so
 //  if (this.x + this.size < 0 || this.x > width) {
-  //  return true;
-  //}
+//  return true;
+//}
 //  else {
-    //return false;
-  //}
+//return false;
+//}
 
 //}
 
@@ -57,6 +57,7 @@ Ball.prototype.update = function () {
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
 /////////// NEW ////////////
+// Changing the direction of the ball after left or right side score //
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
   if (this.x + this.size < 0 ) {
@@ -76,7 +77,7 @@ Ball.prototype.isOffScreen = function () {
   else {
     return 0;
   }
-///////// END NEW //////////
+  ///////// END NEW //////////
 
 }
 

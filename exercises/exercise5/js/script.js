@@ -16,7 +16,7 @@ var rightPaddle;
 
 
 function preload () {
-   fontRegular = loadFont('assets/fonts/megrim.ttf');
+  fontRegular = loadFont('assets/fonts/megrim.ttf');
 }
 // setup()
 //
@@ -38,15 +38,15 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
-///////// NEW //////////
-// added text to keep score //
+  ///////// NEW //////////
+  // added text to keep score //
   fill(255);
   textSize(50);
   text(ball.scoreLeft, 250,20);
   text(ball.scoreRight, 400, 20);
   textAlign(CENTER,CENTER);
   textFont(fontRegular);
-///////// END NEW //////////
+  ///////// END NEW //////////
 
 
   leftPaddle.handleInput();
@@ -57,8 +57,8 @@ function draw() {
   rightPaddle.update();
   var scoreBoard = ball.isOffScreen();
 
-/////////  NEW //////////
-// statement to calculate when score changes for each side //
+  /////////  NEW //////////
+  // statement to calculate when score changes for each side //
   if (scoreBoard == 1) {
     // offscreen left
     //ball.reset();
@@ -71,8 +71,8 @@ function draw() {
     ball.scoreLeft = ball.scoreLeft + 1;
   }
 
- ///////// END NEW //////////
- 
+  ///////// END NEW //////////
+
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 

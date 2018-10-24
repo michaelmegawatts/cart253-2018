@@ -17,8 +17,8 @@ function Paddle(x,y,w,h,speed,downKey,upKey,color) {
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
-///////// END NEW //////////
-// added color option command for paddles //
+  ///////// END NEW //////////
+  // added color option command for paddles //
   this.color = color;
   ///////// END NEW //////////
 }
