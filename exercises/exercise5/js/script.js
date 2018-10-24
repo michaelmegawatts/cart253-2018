@@ -14,6 +14,10 @@ var ball;
 var leftPaddle;
 var rightPaddle;
 
+
+function preload () {
+   fontRegular = loadFont('assets/fonts/megrim.ttf');
+}
 // setup()
 //
 // Creates the ball and paddles
@@ -34,6 +38,14 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
+  fill(255);
+  textSize(50);
+  text(ball.scoreLeft, 200,20);
+  text(ball.scoreRight, 300, 20);
+  textAlign(CENTER,CENTER);
+  textFont(fontRegular);
+
+
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -42,8 +54,16 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffScreen()) {
+  if (ball.isOffScreen() == 1) {
+    // offscreen left
     ball.reset();
+    ball.scoreRight = ball.scoreRight + 1;
+  }
+
+  else if (ball.isOffScreen() == 2) {
+    // offscreen right
+    ball.reset();
+    ball.scoreLeft = ball.scoreLeft + 1;
   }
 
   ball.handleCollision(leftPaddle);
