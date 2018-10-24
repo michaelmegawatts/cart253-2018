@@ -81,6 +81,7 @@ function preload() {
   ballRightSFX = new Audio("assets/sounds/shotgun.wav")
   ballLeftSFX = new Audio("assets/sounds/laser.wav")
   fontRegular = loadFont('assets/fonts/cubicblock.ttf');
+  imageLeft = loadImage("assets/images/lmushroom.png");
   ///////// END NEW /////////
 }
 
@@ -99,6 +100,7 @@ function setup() {
   setupPaddles();
   setupBall();
 
+  image =
 }
 
 // setupPaddles()
