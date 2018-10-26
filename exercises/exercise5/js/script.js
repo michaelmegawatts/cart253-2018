@@ -25,7 +25,7 @@ function preload () {
   beepSFX = new Audio("assets/sounds/beep.wav");
   ballRightSFX = new Audio("assets/sounds/bleep.wav");
   ballLeftSFX = new Audio("assets/sounds/laser.wav");
-  wall = loadImage("assets/images/wall.png");
+  wall = loadImage("assets/images/wall.jpeg");
   ///////// END NEW /////////
 }
 // setup()
@@ -34,7 +34,7 @@ function preload () {
 function setup() {
   //createCanvas(700,480);
   ////////// NEW ///////////
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(700,700);
   // change ball size and paddle size, brought them out more on canvas //
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,30,30);
@@ -51,13 +51,13 @@ function setup() {
 // and displays everything.
 function draw() {
   //background(0);
-  image(wall,0,0,windowWidth, windowHeight);
+  image(wall,0,0,700, 700);
   ///////// NEW //////////
   // added text to keep score //
-  fill(255, 255, 0);
-  textSize(100);
-  text(ball.scoreLeft, width/2 -100,30);
-  text(ball.scoreRight, width/2 +100,30);
+  fill (128, 0, 128);
+  textSize(150);
+  text(ball.scoreLeft, width/2 -100,35);
+  text(ball.scoreRight, width/2 +100,35);
   textAlign(CENTER,CENTER);
   textFont(fontRegular);
   ///////// END NEW //////////
