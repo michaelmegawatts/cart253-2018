@@ -25,10 +25,12 @@ var rightPaddleImage;
 ///////// NEW //////////
 // image set up for backdrop, adding images for paddles and ball //
 function preload() {
+  fontScore = loadFont("assets/fonts/dicefont.ttf");
   floor = loadImage("assets/images/tarot.png")
   ballImage = loadImage("assets/images/ball.jpg");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
   rightPaddleImage = loadImage("assets/images/christ.jpg");
+
 }
 ///////// END NEW //////////
 // setup()
@@ -56,6 +58,14 @@ function draw() {
   ///////// NEW ///////
   // created fancy backdrop for game //
   image(floor,0,0,700,800);
+
+  // Create scoreboard with text //
+  fill (255, 255, 255);
+  textSize(100);
+  text(ball.scoreLeft, width/2 -80,50);
+  text(ball.scoreRight, width/2 +100,50);
+  textAlign(CENTER,CENTER);
+  textFont(fontScore);
   //////// END NEW ////////
 
 
@@ -66,9 +76,19 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffScreen()) {
-    ball.reset();
-  }
+  ///////// NEW ////////////
+  // Create variable to calculate when score changes for each side //
+  var scoreBoard = ball.isOffScreen();
+    //if (ball.isOffScreen()) {
+    //ball.reset();
+    if (scoreBoard == 1) {
+      ball.scoreRight = ball.scoreRight +1;
+    }
+
+    else if (scoreBoard == 2) {
+      ball.scoreLeft = ball.scoreLeft +1;
+    }
+
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);

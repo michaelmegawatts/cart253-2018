@@ -14,6 +14,10 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+  //////// NEW ////////
+  // Create objects for keeping score and creating score board //
+  this.scoreLeft = 0;
+  this.scoreRight = 0;
 }
 
 // update()
@@ -41,11 +45,17 @@ Ball.prototype.update = function () {
 // Otherwise it returns false.
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
-  if (this.x + this.size < 0 || this.x > width) {
-    return true;
+
+/////////// NEW ////////
+// create statement for when ball goes off screen to track scoreboard //
+  if (this.x + this.size < 0) {
+    return 1;
+  }
+  if (this.x > width) {
+    return 2;
   }
   else {
-    return false;
+    return 0;
   }
 }
 
