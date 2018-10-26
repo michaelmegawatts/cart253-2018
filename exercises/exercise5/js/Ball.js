@@ -7,6 +7,7 @@
 // Ball constructor
 //
 // Sets the properties with the provided arguments
+
 function Ball(x,y,vx,vy,size,speed) {
   this.x = x;
   this.y = y;
@@ -14,9 +15,12 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+  /////////  NEW //////////
+  // objects for keeping score and creating score board //
   this.scoreLeft = 0;
   this.scoreRight = 0;
 }
+/////////  END NEW //////////
 
 // update()
 //
@@ -34,6 +38,11 @@ Ball.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+    //////////// NEW //////////
+    // Play the bouncing effect when this is true
+    beepSFX.currentTime = 0;
+    beepSFX.play();
+    /////////// END NEW ////////////
   }
 }
 
@@ -57,21 +66,28 @@ Ball.prototype.update = function () {
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
 /////////// NEW ////////////
-// Changing the direction of the ball after left or right side score //
-Ball.prototype.isOffScreen = function () {
-  // Check for going off screen and reset if so
+// Changing the direction of the ball after left or right side score, adding sound effects
+// for launching of ball from each side //
+Ball.prototype.isOffScreen = function (leftPaddle, rightPaddle) {
+  // Check for going off screen and reset if so, bring ball back on screen in opposite direction
+  // play sound effect, and fade paddle //
   if (this.x + this.size < 0 ) {
     this.x = 10;
     this.y = random(0,480);
     this.vx = random(10);
     this.vy = random(10);
+    ballLeftSFX.play();
+    leftPaddle.fade();
     return 1;
   }
+
   else if(this.x > width){
     this.x = width;
     this.y = random (0,480);
     this.vx = random(-11);
     this.vy = random(-10);
+    ballRightSFX.play();
+    rightPaddle.fade();
     return 2;
   }
   else {
@@ -84,10 +100,13 @@ Ball.prototype.isOffScreen = function () {
 // display()
 //
 // Draw the ball as a rectangle on the screen
+/////////  NEW //////////
+// change color of ball //
 Ball.prototype.display = function () {
-  fill(255);
+  fill(255,255,0);
   rect(this.x,this.y,this.size,this.size);
 }
+/////////  END NEW //////////
 
 // handleCollision(paddle)
 //

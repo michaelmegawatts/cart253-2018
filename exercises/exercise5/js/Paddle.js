@@ -48,9 +48,17 @@ Paddle.prototype.update = function() {
 }
 
 // display()
-//
-// Draw the paddle as a rectangle on the screen
+//////////// NEW ////////////
+// Draw the paddle as a rectangle on the screen, and set functions to fade color of paddles//
 Paddle.prototype.display = function() {
   fill(this.color);
   rect(this.x,this.y,this.w,this.h);
 }
+
+Paddle.prototype.fade = function() {
+  var r = red (this.color) -10;
+  var b = blue (this.color) -10;
+  this.color.setRed(r);
+  this.color.setBlue(b);
+}
+//////////// END NEW ////////////
