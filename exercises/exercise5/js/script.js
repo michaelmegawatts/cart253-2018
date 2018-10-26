@@ -56,8 +56,8 @@ function draw() {
   // added text to keep score //
   fill (128, 0, 128);
   textSize(150);
-  text(ball.scoreLeft, width/2 -100,35);
-  text(ball.scoreRight, width/2 +100,35);
+  text(ball.scoreLeft, width/2 -100,200);
+  text(ball.scoreRight, width/2 +100,200);
   textAlign(CENTER,CENTER);
   textFont(fontRegular);
   ///////// END NEW //////////
