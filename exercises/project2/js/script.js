@@ -13,12 +13,20 @@
 var ball;
 var leftPaddle;
 var rightPaddle;
+///////// NEW //////////
+var floor;
+///////// END NEW //////////
 
+///////// NEW //////////
+function preload() {
+  floor = loadImage("assets/images/tarot.png")
+}
+///////// END NEW //////////
 // setup()
 //
 // Creates the ball and paddles
 function setup() {
-  createCanvas(640,480);
+  createCanvas(700,800);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
@@ -33,7 +41,11 @@ function setup() {
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
-  background(0);
+  //background(0);
+  ///////// NEW ///////
+  image(floor,0,0,700,800);
+  //////// END NEW ////////
+
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
