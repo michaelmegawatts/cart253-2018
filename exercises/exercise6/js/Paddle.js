@@ -4,8 +4,7 @@
 // to specify the input keys to move it up and down
 ///////////// FIXED
 // Paddle constructor
-
-Sets the properties with the provided arguments or defaults
+//Sets the properties with the provided arguments or defaults
 ///////////// FIXED
 function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.x = x;
