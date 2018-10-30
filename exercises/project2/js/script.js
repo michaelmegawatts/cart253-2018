@@ -31,6 +31,8 @@ function preload() {
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
   rightPaddleImage = loadImage("assets/images/christ.jpg");
   beepSFX = new Audio("assets/sounds/beep.wav");
+  ballLeftSFX = new Audio("assets/sounds/baphometsound.wav");
+  ballRightSFX = new Audio("assets/sounds/christsound.wav");
 
 }
 ///////// END NEW //////////
