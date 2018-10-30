@@ -30,6 +30,7 @@ function preload() {
   ballImage = loadImage("assets/images/ball.jpg");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
   rightPaddleImage = loadImage("assets/images/christ.jpg");
+  beepSFX = new Audio("assets/sounds/beep.wav");
 
 }
 ///////// END NEW //////////
@@ -39,7 +40,7 @@ function preload() {
 // adjusted canvas size and shape, made ball larger, made paddles larger and pulled
 // them out onto the background for better visual
 function setup() {
-  createCanvas(700,800);
+  createCanvas(700,900);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,40,40);
   // Create the right paddle with UP and DOWN as controls
@@ -57,7 +58,7 @@ function draw() {
   //background(0);
   ///////// NEW ///////
   // created fancy backdrop for game //
-  image(floor,0,0,700,800);
+  image(floor,0,0,700,900);
 
   // Create scoreboard with text //
   fill (255, 255, 255);

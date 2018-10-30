@@ -36,6 +36,10 @@ Ball.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+    ////////// NEW /////////
+    // play effect when this is true
+    beepSFX.currentTime = 0;
+    beepSFX.play();
   }
 }
 
