@@ -24,7 +24,8 @@ function Ball(x,y,vx,vy,size,speed) {
 ///////////// FIXED
 Ball.prototype.updated = function () {
   // Update position with velocity
-  this.x = this.vx;
+  ////////// FIXED
+  this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
@@ -56,7 +57,8 @@ Ball.prototype.isOffScreen = function () {
 // Draw the ball as a rectangle on the screen
 Ball.prototype.display = function () {
   ///////////// FIXED
-  rect(this.x + this.y);
+  fill(255,255,0);
+  rect(this.x,this.y,this.size,this.size);
 }
 
 // handleCollision(paddle)
@@ -81,7 +83,8 @@ Ball.prototype.handleCollision = function(paddle) {
 // reset()
 //
 // Set position back to the middle of the screen
-Ball.prototype.rest = function () {
+////////// FIXED
+Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
 }
