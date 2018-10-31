@@ -24,7 +24,7 @@ function setup() {
   noStroke();
   // Create a ball
   //////////// FIXED
-  ball = new Ball(width/2,height/2,10,10,10,10);
+  ball = new Ball(width/2,height/2,5,5,5,5);
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width-10,height/2,10,600,10,UP_ARROW,DOWN_ARROW);
   // Create the left paddle with W and S as controls
