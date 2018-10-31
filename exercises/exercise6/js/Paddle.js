@@ -50,5 +50,6 @@ Paddle.prototype.update = function() {
 ///////////// FIXED
 Paddle.prototype.display = function() {
   //////////// FIXED
+  fill(255);
   rect(this.x,this.y,this.w,this.h);
 }
