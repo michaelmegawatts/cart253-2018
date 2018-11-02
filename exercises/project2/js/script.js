@@ -32,7 +32,7 @@ var state = "TITLE";
 // fonts for score and game display, and sound effects
 function preload() {
   fontScore = loadFont("assets/fonts/dicefont.ttf");
-  fontGame = loadFont("assets/fonts/pdark.ttf");
+  fontGame = loadFont("assets/fonts/hultogital.ttf");
   floor = loadImage("assets/images/tarot.png")
   ballImage = loadImage("assets/images/ball.jpg");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
@@ -71,6 +71,7 @@ function draw() {
 
   // Create scoreboard with text //
   fill (255, 255, 255);
+  stroke(0,0,255);
   textSize(100);
   text(ball.scoreLeft, width/2 -80,50);
   text(ball.scoreRight, width/2 +100,50);
@@ -115,16 +116,16 @@ function displayTitle() {
   // Create elements for display
   push();
   textAlign(CENTER,CENTER);
-  textSize(50);
-  fill(0,0,255);
-  stroke(255);
+  textSize(70);
+  fill(255);
+  stroke(255,0,0);
   textFont(fontGame);
   // Display the text
-  text("AS ABOVE SO BELOW !",width/2,height/4);
+  text("AS ABOVE SO BELOW",width/2,height/4);
   // Font size goes down
-  textSize(25);
+  textSize(40);
   // Display the instructions
-  text("Press SPACE to play \n Baphomet - W = up + S = down \n Jesus - UP + DOWN",width/2,3*height/4);
+  text("Press SPACE to play \n Baphomet   W  for  UP     S  for DOWN \n Jesus   UP or DOWN arrow keys",width/2,3*height/4);
   pop();
 
   // Check whether the spacebar was pressed to start the game...
@@ -149,7 +150,7 @@ function displayGame() {
       ball.scoreLeft = ball.scoreLeft +1;
     }
 
-    if (ball.scoreRight == 30 || ball.scoreLeft == 30) {
+    if (ball.scoreRight == 5 || ball.scoreLeft == 5) {
       state = "GAME OVER"
     }
 }
@@ -161,10 +162,10 @@ function displayGame() {
 function displayGameOver() {
   push();
   textAlign(CENTER,CENTER);
-  textSize(32);
+  textSize(80);
   fill(255);
-  stroke(255);
+  stroke(255,0,0);
   textFont(fontGame);
-  text("TISK TISK TISK",width/2,height/2);
+  text("TISK! TISK! TISK!",width/2,height/1.3);
   pop();
 }
