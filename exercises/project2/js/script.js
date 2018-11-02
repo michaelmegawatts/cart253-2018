@@ -19,13 +19,20 @@ var floor;
 var ballImage;
 var leftPaddleImage;
 var rightPaddleImage;
-
 ///////// END NEW //////////
 
+////////// NEW //////////
+// Setup for titles to appear at beginning and end of game
+var state = "TITLE";
+//////// END NEW //////////
+
+
 ///////// NEW //////////
-// image set up for backdrop, adding images for paddles and ball //
+// image set up for backdrop, adding images for paddles and ball, special
+// fonts for score and game display, and sound effects
 function preload() {
   fontScore = loadFont("assets/fonts/dicefont.ttf");
+  fontGame = loadFont("assets/fonts/pdark.ttf");
   floor = loadImage("assets/images/tarot.png")
   ballImage = loadImage("assets/images/ball.jpg");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
@@ -71,7 +78,6 @@ function draw() {
   textFont(fontScore);
   //////// END NEW ////////
 
-
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
@@ -79,6 +85,57 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
+  ball.handleCollision(leftPaddle);
+  ball.handleCollision(rightPaddle);
+
+  ball.display();
+  leftPaddle.display();
+  rightPaddle.display();
+
+
+//////// NEW /////////
+// Set up display for title and where players are in game //
+  switch (state) {
+    case "TITLE":
+    displayTitle();
+    break;
+
+    case "GAME":
+    displayGame();
+    break;
+
+    case "GAME OVER":
+    displayGameOver();
+    break;
+  }
+}
+//////// NEW //////////
+// Displays the title and controls on the screen
+function displayTitle() {
+  // Create elements for display
+  push();
+  textAlign(CENTER,CENTER);
+  textSize(50);
+  fill(0,0,255);
+  stroke(255);
+  textFont(fontGame);
+  // Display the text
+  text("AS ABOVE SO BELOW !",width/2,height/4);
+  // Font size goes down
+  textSize(25);
+  // Display the instructions
+  text("Press SPACE to play \n Baphomet - W = up + S = down \n Jesus - UP + DOWN",width/2,3*height/4);
+  pop();
+
+  // Check whether the spacebar was pressed to start the game...
+  if (keyIsPressed && key === ' ') {
+    // ... if it was, change the state to "GAME" so the switch statement in draw()
+    // will display the game instead
+    state = "GAME";
+  }
+}
+
+function displayGame() {
   ///////// NEW ////////////
   // Create variable to calculate when score changes for each side //
   var scoreBoard = ball.isOffScreen();
@@ -92,11 +149,22 @@ function draw() {
       ball.scoreLeft = ball.scoreLeft +1;
     }
 
+    if (ball.scoreRight == 30 || ball.scoreLeft == 30) {
+      state = "GAME OVER"
+    }
+}
 
-  ball.handleCollision(leftPaddle);
-  ball.handleCollision(rightPaddle);
-
-  ball.display();
-  leftPaddle.display();
-  rightPaddle.display();
+/////////// NEW ///////////
+// displayGameOver()
+//
+// Displays game over text
+function displayGameOver() {
+  push();
+  textAlign(CENTER,CENTER);
+  textSize(32);
+  fill(255);
+  stroke(255);
+  textFont(fontGame);
+  text("TISK TISK TISK",width/2,height/2);
+  pop();
 }
