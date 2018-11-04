@@ -13,10 +13,12 @@
 var ball;
 var leftPaddle;
 var rightPaddle;
+var apple;
 ///////// NEW //////////
-// Create variables for ball and paddles to replace with images //
+// Create variables for ball, apple, and paddles to replace with images //
 var floor;
 var ballImage;
+var appleImage;
 var leftPaddleImage;
 var rightPaddleImage;
 ///////// END NEW //////////
@@ -33,8 +35,9 @@ var state = "TITLE";
 function preload() {
   fontScore = loadFont("assets/fonts/dicefont.ttf");
   fontGame = loadFont("assets/fonts/hultogital.ttf");
-  floor = loadImage("assets/images/tarot.png")
+  floor = loadImage("assets/images/tarot.png"); 
   ballImage = loadImage("assets/images/ball.jpg");
+  appleImage = loadImage("assets/images/apple.png");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
   rightPaddleImage = loadImage("assets/images/christ.jpg");
   beepSFX = new Audio("assets/sounds/beep.wav");
@@ -52,6 +55,8 @@ function setup() {
   createCanvas(700,900);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,40,40);
+// Create apple
+  apple = new Apple(width/2,height/2,5,5,40,40);
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width-60,height/2,40,90,10,DOWN_ARROW,UP_ARROW,rightPaddleImage);
   // Create the left paddle with W and S as controls
@@ -89,6 +94,8 @@ function draw() {
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
+
+  apple.display();
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
