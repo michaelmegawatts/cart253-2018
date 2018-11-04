@@ -150,7 +150,7 @@ function displayGame() {
       ball.scoreLeft = ball.scoreLeft +1;
     }
 
-    if (ball.scoreRight == 5 || ball.scoreLeft == 5) {
+    if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
       state = "GAME OVER"
     }
 }
