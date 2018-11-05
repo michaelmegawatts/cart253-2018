@@ -1,8 +1,5 @@
 // Basic OO Pong
-// by Pippin Barr
-//
-// A primitive implementation of Pong with no scoring system
-// just the ability to play the game with the keyboard.
+// by Pippin Barr spiced up by Michael Watts
 //
 // Arrow keys control the right hand paddle, W and S control
 // the left hand paddle.
