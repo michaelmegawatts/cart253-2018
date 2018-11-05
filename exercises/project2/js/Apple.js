@@ -58,6 +58,19 @@ Apple.prototype.display = function () {
   image(appleImage,this.x,this.y,this.size,this.size);
 }
 
+Apple.prototype.handleCollision = function(paddle) {
+  // Check if the apple overlaps the paddle on x axis
+  if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
+    // Check if the apple overlaps the paddle on y axis
+    if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
+      // If so, move apple back to previous position (by subtracting current velocity)
+      this.x -= this.vx;
+      this.y -= this.vy;
+      // Reverse x velocity to bounce
+      this.vx = -this.vx;
+    }
+  }
+}
 
 Apple.prototype.reset = function () {
   // Reset the apple here

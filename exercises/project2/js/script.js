@@ -95,6 +95,8 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
+  apple.handleCollision(leftPaddle);
+  apple.handleCollision(rightPaddle);
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
