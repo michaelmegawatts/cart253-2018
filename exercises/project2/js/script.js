@@ -8,13 +8,13 @@
 // the left hand paddle.
 //
 // Written with JavaScript OOP.
-
+/////// NEW //////////
 // Variable to contain the objects representing our ball and paddles
 var ball;
 var leftPaddle;
 var rightPaddle;
 var apple;
-///////// NEW //////////
+
 // Create variables for ball, apple, and paddles to replace with images //
 var floor;
 var ballImage;
@@ -35,7 +35,7 @@ var state = "TITLE";
 function preload() {
   fontScore = loadFont("assets/fonts/dicefont.ttf");
   fontGame = loadFont("assets/fonts/hultogital.ttf");
-  floor = loadImage("assets/images/tarot.png"); 
+  floor = loadImage("assets/images/tarot.png");
   ballImage = loadImage("assets/images/ball.jpg");
   appleImage = loadImage("assets/images/apple.png");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
@@ -43,27 +43,28 @@ function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
   ballLeftSFX = new Audio("assets/sounds/baphometsound.wav");
   ballRightSFX = new Audio("assets/sounds/christsound.wav");
-
-}
 ///////// END NEW //////////
+}
+
 // setup()
 //
 // Creates the ball and paddles
 // adjusted canvas size and shape, made ball larger, made paddles larger and pulled
 // them out onto the background for better visual
+////////// NEW ///////////
 function setup() {
   createCanvas(700,900);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,40,40);
 // Create apple
-  apple = new Apple(width/2,height/2,5,5,40,40);
+  apple = new Apple(width/2,height/4,5,5,40,40);
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width-60,height/2,40,90,10,DOWN_ARROW,UP_ARROW,rightPaddleImage);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   leftPaddle = new Paddle(20,height/2,40,90,10,83,87,leftPaddleImage);
 }
-
+////////// END NEW ///////////
 // draw()
 //
 // Handles input, updates all the elements, checks for collisions
@@ -84,9 +85,12 @@ function draw() {
   textFont(fontScore);
   //////// END NEW ////////
 
+/////////// NEW //////////
+// added updates for apple
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
+  apple.update();
   ball.update();
   leftPaddle.update();
   rightPaddle.update();
@@ -145,6 +149,8 @@ function displayTitle() {
 
 function displayGame() {
   ///////// NEW ////////////
+  // calling the OffScreen function for apple to return on screen
+  apple.isOffScreen();
   // Create variable to calculate when score changes for each side //
   var scoreBoard = ball.isOffScreen();
     //if (ball.isOffScreen()) {

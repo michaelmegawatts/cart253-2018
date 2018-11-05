@@ -35,11 +35,32 @@ Apple.prototype.update = function () {
   }
 }
 
+Apple.prototype.isOffScreen = function () {
+// Check for apple going off screen and reset if so
+// Create statement for when apple goes off screen and options
+// to bring apple back in opposite direction //
+  if (this.x + this.size < 0) {
+      this.x = 10;
+      this.y = random(0,480);
+      this.vx = random(5);
+      this.vy = random(5);
+  }
+  if (this.x > width) {
+      this.x = width;
+      this.y = random (0,480);
+      this.vx = random(-3);
+      this.vy = random(-5);
+  }
+}
+
 Apple.prototype.display = function () {
-  // Display the ball here
+  // Display the apple here
   image(appleImage,this.x,this.y,this.size,this.size);
 }
 
+
 Apple.prototype.reset = function () {
-  // Reset the ball here
+  // Reset the apple here
+  this.x = width/2;
+  this.y = height/4;
 }
