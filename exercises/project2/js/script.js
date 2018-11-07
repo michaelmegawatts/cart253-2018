@@ -14,7 +14,7 @@ var rightPaddle;
 var apple;
 var portal;
 
-// Create variables for ball, apple, and paddles to replace with images //
+// Create variables for ball, apple, and paddles to be replaced with images
 var floor;
 var ballImage;
 var appleImage;
@@ -55,7 +55,7 @@ function preload() {
 function setup() {
   createCanvas(700,900);
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,40,40);
+  ball = new Ball(width/2,height/2,10,10,40,40);
   // Create apple
   apple = new Apple(width/2,height/4,5,5,40,40);
   // Create the right paddle with UP and DOWN as controls
@@ -63,6 +63,8 @@ function setup() {
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   leftPaddle = new Paddle(20,height/2,40,90,30,83,87,leftPaddleImage);
+  // Create portal in middle of cross
+  portal = new Portal(355,370,100,100);
 }
 ////////// END NEW ///////////
 // draw()
@@ -74,12 +76,6 @@ function draw() {
   ///////// NEW ///////
   // created fancy backdrop for game //
   image(floor,0,0,700,900);
-  // Create portal
-  fill(0,0,0);
-  stroke(255,0,0);
-  ellipse(354,370,100,100,);
-
-
   // Create scoreboard with text //
   fill (255, 255, 255);
   stroke(0,0,255);
@@ -92,7 +88,7 @@ function draw() {
 
 
   /////////// NEW //////////
-  // added updates for apple
+  // added updates for apple, ball, portal
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
@@ -105,13 +101,15 @@ function draw() {
   apple.handleCollision(rightPaddle);
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
-
+  portal.handleCollisionBall(ball);
+  portal.handleCollisionApple(apple);
 
   apple.display();
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
-
+  portal.display();
+  //////// END NEW ////////
 
   //////// NEW /////////
   // Set up display for title and where players are in game //
@@ -129,6 +127,8 @@ function draw() {
     break;
   }
 }
+//////// END NEW ////////
+
 //////// NEW //////////
 // Displays the title and controls on the screen
 function displayTitle() {
@@ -154,9 +154,12 @@ function displayTitle() {
     state = "GAME";
   }
 }
+//////// END NEW ////////
 
+///////// NEW ////////////
+// displayGame()
+// Handle the display of the score
 function displayGame() {
-  ///////// NEW ////////////
   // calling the OffScreen function for apple to return on screen
   apple.isOffScreen();
   // Create variable to calculate when score changes for each side //
@@ -166,7 +169,7 @@ function displayGame() {
   if (scoreBoard == 1) {
     ball.scoreRight = ball.scoreRight +1;
   }
-
+  
   else if (scoreBoard == 2) {
     ball.scoreLeft = ball.scoreLeft +1;
   }
@@ -175,6 +178,7 @@ function displayGame() {
     state = "GAME OVER"
   }
 }
+//////// END NEW ////////
 
 /////////// NEW ///////////
 // displayGameOver()
@@ -190,3 +194,4 @@ function displayGameOver() {
   text("TISK! TISK! TISK!",width/2,height/1.3);
   pop();
 }
+///////////// END NEW ///////////

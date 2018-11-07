@@ -14,11 +14,13 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+
   //////// NEW ////////
   // Create objects for keeping score and creating score board //
   this.scoreLeft = 0;
   this.scoreRight = 0;
 }
+  /////// END NEW ///////
 
 // update()
 //
@@ -40,6 +42,7 @@ Ball.prototype.update = function () {
     // play effect when this is true
     beepSFX.currentTime = 0;
     beepSFX.play();
+    ///////// END NEW ///////
   }
 }
 
@@ -75,13 +78,15 @@ Ball.prototype.isOffScreen = function () {
 }
 /////////// END NEW /////////
 
+//////// NEW //////////
 // display()
 //
-// Draw the ball as a rectangle on the screen
+// Draw the ball as an image on screen
 Ball.prototype.display = function () {
   fill(255);
   image(ballImage,this.x,this.y,this.size,this.size);
 }
+////////// END NEW /////////
 
 // handleCollision(paddle)
 //
