@@ -74,6 +74,10 @@ Apple.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+
+    if (paddle.speed > 0){
+      paddle.speed = paddle.speed - .5;
+      }
     }
   }
 }

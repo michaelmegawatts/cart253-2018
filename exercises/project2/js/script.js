@@ -56,10 +56,10 @@ function setup() {
 // Create apple
   apple = new Apple(width/2,height/4,5,5,40,40);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-60,height/2,40,90,10,DOWN_ARROW,UP_ARROW,rightPaddleImage);
+  rightPaddle = new Paddle(width-60,height/2,40,90,30,DOWN_ARROW,UP_ARROW,rightPaddleImage);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(20,height/2,40,90,10,83,87,leftPaddleImage);
+  leftPaddle = new Paddle(20,height/2,40,90,30,83,87,leftPaddleImage);
 }
 ////////// END NEW ///////////
 // draw()
