@@ -6,11 +6,13 @@
 //
 // Written with JavaScript OOP.
 /////// NEW //////////
-// Variable to contain the objects representing our ball and paddles
+// Variable to contain the objects representing our ball, paddles,
+// apple, and portal
 var ball;
 var leftPaddle;
 var rightPaddle;
 var apple;
+var portal;
 
 // Create variables for ball, apple, and paddles to replace with images //
 var floor;
@@ -41,7 +43,7 @@ function preload() {
   ballLeftSFX = new Audio("assets/sounds/baphometsound.wav");
   ballRightSFX = new Audio("assets/sounds/christsound.wav");
   appleSFX = new Audio("assets/sounds/applesound.wav");
-///////// END NEW //////////
+  ///////// END NEW //////////
 }
 
 // setup()
@@ -54,7 +56,7 @@ function setup() {
   createCanvas(700,900);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,40,40);
-// Create apple
+  // Create apple
   apple = new Apple(width/2,height/4,5,5,40,40);
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width-60,height/2,40,90,30,DOWN_ARROW,UP_ARROW,rightPaddleImage);
@@ -72,6 +74,11 @@ function draw() {
   ///////// NEW ///////
   // created fancy backdrop for game //
   image(floor,0,0,700,900);
+  // Create portal
+  fill(0,0,0);
+  stroke(255,0,0);
+  ellipse(354,370,100,100,);
+
 
   // Create scoreboard with text //
   fill (255, 255, 255);
@@ -83,8 +90,9 @@ function draw() {
   textFont(fontScore);
   //////// END NEW ////////
 
-/////////// NEW //////////
-// added updates for apple
+
+  /////////// NEW //////////
+  // added updates for apple
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
@@ -105,8 +113,8 @@ function draw() {
   rightPaddle.display();
 
 
-//////// NEW /////////
-// Set up display for title and where players are in game //
+  //////// NEW /////////
+  // Set up display for title and where players are in game //
   switch (state) {
     case "TITLE":
     displayTitle();
@@ -153,19 +161,19 @@ function displayGame() {
   apple.isOffScreen();
   // Create variable to calculate when score changes for each side //
   var scoreBoard = ball.isOffScreen();
-    //if (ball.isOffScreen()) {
-    //ball.reset();
-    if (scoreBoard == 1) {
-      ball.scoreRight = ball.scoreRight +1;
-    }
+  //if (ball.isOffScreen()) {
+  //ball.reset();
+  if (scoreBoard == 1) {
+    ball.scoreRight = ball.scoreRight +1;
+  }
 
-    else if (scoreBoard == 2) {
-      ball.scoreLeft = ball.scoreLeft +1;
-    }
+  else if (scoreBoard == 2) {
+    ball.scoreLeft = ball.scoreLeft +1;
+  }
 
-    if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
-      state = "GAME OVER"
-    }
+  if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
+    state = "GAME OVER"
+  }
 }
 
 /////////// NEW ///////////

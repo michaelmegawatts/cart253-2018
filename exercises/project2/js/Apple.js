@@ -42,26 +42,27 @@ Apple.prototype.update = function () {
 }
 
 Apple.prototype.isOffScreen = function () {
-// Check for apple going off screen and reset if so
-// Create statement for when apple goes off screen and options
-// to bring apple back in opposite direction //
+  // Check for apple going off screen and reset if so
+  // Create statement for when apple goes off screen and options
+  // to bring apple back in opposite direction //
   if (this.x + this.size < 0) {
-      this.x = 10;
-      this.y = random(0,280);
-      this.vx = random(10);
-      this.vy = random(5);
+    this.x = 10;
+    this.y = random(0,280);
+    this.vx = random(10);
+    this.vy = random(5);
   }
   if (this.x > width) {
-      this.x = width;
-      this.y = random (0,280);
-      this.vx = random(-13);
-      this.vy = random(-5);
+    this.x = width;
+    this.y = random (0,280);
+    this.vx = random(-13);
+    this.vy = random(-5);
   }
 }
-
+//////// NEW /////////////
 Apple.prototype.display = function () {
   // Display the apple here
   image(appleImage,this.x,this.y,this.size,this.size);
+  // Loop for apple buzzing sound
   appleSFX.play();
   appleSFX.loop = true;
 }
@@ -76,9 +77,9 @@ Apple.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
- // Slow down the paddle when it is touched by the apple
-    if (paddle.speed > 0){
-      paddle.speed = paddle.speed - 1;
+      // Slow down the paddle when it is touched by the apple
+      if (paddle.speed > 0){
+        paddle.speed = paddle.speed - 1;
       }
     }
   }

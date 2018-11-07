@@ -50,23 +50,23 @@ Ball.prototype.update = function () {
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
 
-/////////// NEW ////////
-// create statement for when ball goes off screen to track scoreboard,
-// and options to bring ball back in opposite direction //
+  /////////// NEW ////////
+  // create statement for when ball goes off screen to track scoreboard,
+  // and options to bring ball back in opposite direction //
   if (this.x + this.size < 0) {
-      this.x = 10;
-      this.y = random(0,480);
-      this.vx = random(15);
-      this.vy = random(13);
-      ballLeftSFX.play();
+    this.x = 10;
+    this.y = random(0,480);
+    this.vx = random(15);
+    this.vy = random(13);
+    ballLeftSFX.play();
     return 1;
   }
   if (this.x > width) {
-      this.x = width;
-      this.y = random (0,480);
-      this.vx = random(-13);
-      this.vy = random(-14);
-      ballRightSFX.play();
+    this.x = width;
+    this.y = random (0,480);
+    this.vx = random(-13);
+    this.vy = random(-14);
+    ballRightSFX.play();
     return 2;
   }
   else {
