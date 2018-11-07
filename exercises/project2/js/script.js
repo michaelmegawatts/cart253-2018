@@ -40,6 +40,7 @@ function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
   ballLeftSFX = new Audio("assets/sounds/baphometsound.wav");
   ballRightSFX = new Audio("assets/sounds/christsound.wav");
+  appleSFX = new Audio("assets/sounds/applesound.wav");
 ///////// END NEW //////////
 }
 

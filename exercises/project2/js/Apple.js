@@ -62,8 +62,10 @@ Apple.prototype.isOffScreen = function () {
 Apple.prototype.display = function () {
   // Display the apple here
   image(appleImage,this.x,this.y,this.size,this.size);
+  appleSFX.play();
+  appleSFX.loop = true;
 }
-
+/////////// NEW ///////////
 Apple.prototype.handleCollision = function(paddle) {
   // Check if the apple overlaps the paddle on x axis
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
@@ -74,14 +76,14 @@ Apple.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
-
+ // Slow down the paddle when it is touched by the apple
     if (paddle.speed > 0){
-      paddle.speed = paddle.speed - .5;
+      paddle.speed = paddle.speed - 1;
       }
     }
   }
 }
-
+/////////// END NEW ////////////
 Apple.prototype.reset = function () {
   // Reset the apple here
   this.x = width/2;
