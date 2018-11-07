@@ -20,6 +20,7 @@ var ballImage;
 var appleImage;
 var leftPaddleImage;
 var rightPaddleImage;
+var ballArray = []
 ///////// END NEW //////////
 
 ////////// NEW //////////
@@ -65,6 +66,10 @@ function setup() {
   leftPaddle = new Paddle(0,height/2,40,90,30,83,87,leftPaddleImage);
   // Create portal in middle of cross
   portal = new Portal(354,370,120,120);
+
+  for (var i = 0; i < 1; i++) {
+  ballArray.push (new Ball(i*50,i*20,10,10,40,40));
+  }
 }
 ////////// END NEW ///////////
 // draw()
@@ -110,6 +115,26 @@ function draw() {
   rightPaddle.display();
   portal.display();
   //////// END NEW ////////
+  for (var i = 0; i < ballArray.length; i++) {
+    ballArray[i].update();
+    ballArray[i].handleCollision(leftPaddle);
+    ballArray[i].handleCollision(rightPaddle);
+    ballArray[i].display();
+    var scoreBoard = ballArray[i].isOffScreen();
+
+  if (scoreBoard == 1) {
+      ball.scoreRight = ball.scoreRight +1;
+    }
+
+    else if (scoreBoard == 2) {
+      ball.scoreLeft = ball.scoreLeft +1;
+    }
+
+    if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
+      state = "GAME OVER"
+    }
+    portal.handleCollisionBall(ballArray[i]);
+    }
 
   //////// NEW /////////
   // Set up display for title and where players are in game //

@@ -34,6 +34,9 @@ Portal.prototype.handleCollisionBall = function(ball) {
     ball.y = random(0,900);
     ball.vx = random(-15);
     ball.vy = random(-13);
+  if (ballArray.length < 7) {
+    ballArray.push (new Ball(random(700),random(900),10,10,40,40));
+    }
   }
 }
 
