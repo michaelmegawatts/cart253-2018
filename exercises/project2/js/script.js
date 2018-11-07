@@ -57,14 +57,14 @@ function setup() {
   // Create a ball
   ball = new Ball(width/2,height/2,10,10,40,40);
   // Create apple
-  apple = new Apple(width/2,height/4,5,5,40,40);
+  apple = new Apple(width/2,height/4,5,5,60,60);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-60,height/2,40,90,30,DOWN_ARROW,UP_ARROW,rightPaddleImage);
+  rightPaddle = new Paddle(width-40,height/2,40,90,30,DOWN_ARROW,UP_ARROW,rightPaddleImage);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(20,height/2,40,90,30,83,87,leftPaddleImage);
+  leftPaddle = new Paddle(0,height/2,40,90,30,83,87,leftPaddleImage);
   // Create portal in middle of cross
-  portal = new Portal(355,370,100,100);
+  portal = new Portal(354,370,120,120);
 }
 ////////// END NEW ///////////
 // draw()
@@ -169,7 +169,7 @@ function displayGame() {
   if (scoreBoard == 1) {
     ball.scoreRight = ball.scoreRight +1;
   }
-  
+
   else if (scoreBoard == 2) {
     ball.scoreLeft = ball.scoreLeft +1;
   }
