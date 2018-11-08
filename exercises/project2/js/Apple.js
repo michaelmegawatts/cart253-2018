@@ -27,8 +27,8 @@ function Apple(x,y,vx,vy,size,speed) {
 Apple.prototype.update = function () {
   // Update position with velocity using noise function to move apple
   // randomly
-  this.tx += .015;
-  this.ty += .012;
+  this.tx += .007;
+  this.ty += .007;
   this.x = map(noise(this.tx),0,1,-200,width+250);
   this.y = map(noise(this.ty),0,1,-200,height+250);
 

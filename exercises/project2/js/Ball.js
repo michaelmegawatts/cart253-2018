@@ -59,16 +59,16 @@ Ball.prototype.isOffScreen = function () {
   if (this.x + this.size < 0) {
     this.x = 10;
     this.y = random(0,480);
-    this.vx = random(15);
-    this.vy = random(13);
+    this.vx = random(5);
+    this.vy = random(3);
     ballLeftSFX.play();
     return 1;
   }
   if (this.x > width) {
     this.x = width;
     this.y = random (0,480);
-    this.vx = random(-13);
-    this.vy = random(-14);
+    this.vx = random(-3);
+    this.vy = random(-4);
     ballRightSFX.play();
     return 2;
   }

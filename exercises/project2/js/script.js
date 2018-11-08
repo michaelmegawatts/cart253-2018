@@ -56,7 +56,7 @@ function preload() {
 function setup() {
   createCanvas(700,900);
   // Create a ball
-  ball = new Ball(width/2,height/2,10,10,40,40);
+  ball = new Ball(width/2,height/2,5,5,40,40);
   // Create apple
   apple = new Apple(width/2,height/4,5,5,60,60);
   // Create the right paddle with UP and DOWN as controls
