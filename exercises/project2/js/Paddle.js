@@ -1,7 +1,8 @@
 // Paddle
 //
 // A class that defines how a paddle behaves, including the ability
-// to specify the input keys to move it up and down
+// to specify the input keys to move it up and down. The paddles slow down
+// when the apple touches them.
 
 // Paddle constructor
 //

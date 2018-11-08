@@ -1,9 +1,10 @@
 ///////// NEW /////////
 // Apple
 //
-// A class to define how a second ball called Apple behaves. Including bouncing on the top
+// A class to define how a second object called Apple behaves. Including bouncing on the top
 // and bottom edges of the canvas, going off the left and right sides,
-// and bouncing off paddles.
+// and bouncing off paddles. It is also affected by the portal. It's main
+// job is to slow down the paddles when it touches them
 
 // Apple
 //

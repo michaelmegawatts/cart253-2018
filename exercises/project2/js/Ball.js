@@ -2,7 +2,9 @@
 //
 // A class to define how a ball behaves. Including bouncing on the top
 // and bottom edges of the canvas, going off the left and right sides,
-// and bouncing off paddles.
+// and bouncing off paddles. The ball falls into the portal and re-enters
+// at a random location. There is also a 50% chance a new ball joins
+// the game
 
 // Ball constructor
 //
@@ -67,8 +69,8 @@ Ball.prototype.isOffScreen = function () {
   if (this.x > width) {
     this.x = width;
     this.y = random (0,480);
-    this.vx = random(-3);
-    this.vy = random(-4);
+    this.vx = random(-12);
+    this.vy = random(-10);
     ballRightSFX.play();
     return 2;
   }

@@ -1,8 +1,9 @@
 //////////// NEW /////////
-// Portal
+// Portal - Black hole in center
 //
 // A class to define how a portal behaves when the apple or ball
-// fall into it.
+// fall into it. The objects will re-enter at random locations and there is
+// 50% chance an extra ball will enter the game
 
 // Portal constructor
 //
@@ -32,11 +33,11 @@ Portal.prototype.handleCollisionBall = function(ball) {
   if (dist(ball.x,ball.y,this.x,this.y) < this.w/2) {
     ball.x = random(0,700);
     ball.y = random(0,900);
-    ball.vx = random(-15);
-    ball.vy = random(-13);
+    ball.vx = random(-11);
+    ball.vy = random(-9);
   if (ballArray.length < 7) {
     var r = random();
-      if (r < 0.5) {
+      if (r < 0.30) {
     ballArray.push (new Ball(random(700),random(900),10,10,40,40));
       }
     }

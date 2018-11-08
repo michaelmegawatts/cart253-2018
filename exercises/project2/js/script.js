@@ -3,6 +3,8 @@
 //
 // Arrow keys control the right hand paddle, W and S control
 // the left hand paddle.
+// Press Space Bar to start game. Game goes until 33points to allow
+// time for numerous balls to enter game
 //
 // Written with JavaScript OOP.
 /////// NEW //////////
@@ -130,7 +132,7 @@ function draw() {
       ball.scoreLeft = ball.scoreLeft +1;
     }
 
-    if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
+    if (ball.scoreRight == 33 || ball.scoreLeft == 33) {
       state = "GAME OVER"
     }
     portal.handleCollisionBall(ballArray[i]);
@@ -201,7 +203,7 @@ function displayGame() {
     ball.scoreLeft = ball.scoreLeft +1;
   }
 
-  if (ball.scoreRight == 3 || ball.scoreLeft == 3) {
+  if (ball.scoreRight == 33 || ball.scoreLeft == 33) {
     state = "GAME OVER"
   }
 }
