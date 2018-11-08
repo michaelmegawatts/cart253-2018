@@ -21,6 +21,7 @@ var appleImage;
 var leftPaddleImage;
 var rightPaddleImage;
 var ballArray = []
+var startingBalls = 0;
 ///////// END NEW //////////
 
 ////////// NEW //////////
@@ -56,7 +57,7 @@ function preload() {
 function setup() {
   createCanvas(700,900);
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,40,40);
+  ball = new Ball(width/2,height/7,5,5,40,40);
   // Create apple
   apple = new Apple(width/2,height/4,5,5,60,60);
   // Create the right paddle with UP and DOWN as controls
@@ -67,7 +68,7 @@ function setup() {
   // Create portal in middle of cross
   portal = new Portal(354,370,120,120);
 
-  for (var i = 0; i < 1; i++) {
+  for (var i = 0; i < startingBalls; i++) {
   ballArray.push (new Ball(i*50,i*20,10,10,40,40));
   }
 }
@@ -98,7 +99,6 @@ function draw() {
   rightPaddle.handleInput();
 
   apple.update();
-  ball.update();
   leftPaddle.update();
   rightPaddle.update();
 
@@ -110,11 +110,11 @@ function draw() {
   portal.handleCollisionApple(apple);
 
   apple.display();
-  ball.display();
   leftPaddle.display();
   rightPaddle.display();
   portal.display();
   //////// END NEW ////////
+  // array to add multiple balls to the game that also relate to score
   for (var i = 0; i < ballArray.length; i++) {
     ballArray[i].update();
     ballArray[i].handleCollision(leftPaddle);
@@ -145,6 +145,8 @@ function draw() {
 
     case "GAME":
     displayGame();
+    ball.update();
+    ball.display();
     break;
 
     case "GAME OVER":
@@ -199,7 +201,7 @@ function displayGame() {
     ball.scoreLeft = ball.scoreLeft +1;
   }
 
-  if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
+  if (ball.scoreRight == 3 || ball.scoreLeft == 3) {
     state = "GAME OVER"
   }
 }
@@ -216,7 +218,7 @@ function displayGameOver() {
   fill(255);
   stroke(255,0,0);
   textFont(fontGame);
-  text("TISK! TISK! TISK!",width/2,height/1.3);
+  text("TISK! TISK! TISK! \n GAME OVER ",width/2,height/1.3);
   pop();
 }
 ///////////// END NEW ///////////
