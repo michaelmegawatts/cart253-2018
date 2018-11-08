@@ -80,7 +80,7 @@ Apple.prototype.handleCollision = function(paddle) {
       this.vx = -this.vx;
       // Slow down the paddle when it is touched by the apple
       if (paddle.speed > 0){
-        paddle.speed = paddle.speed - 1;
+        paddle.speed = paddle.speed - 0.5;
       }
     }
   }
