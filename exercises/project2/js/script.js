@@ -8,13 +8,14 @@
 //
 // Written with JavaScript OOP.
 /////// NEW //////////
-// Variable to contain the objects representing our ball, paddles,
-// apple, and portal
+// Variables to contain the objects representing the ball, paddles,
+// apple, and portal, and all visual accessories for the game
 var ball;
 var leftPaddle;
 var rightPaddle;
 var apple;
 var portal;
+var portalGif;
 
 // Create variables for ball, apple, and paddles to be replaced with images
 var floor;
@@ -43,6 +44,7 @@ function preload() {
   appleImage = loadImage("assets/images/apple.png");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
   rightPaddleImage = loadImage("assets/images/christ.jpg");
+  portalGif = createImg("assets/images/portal.gif");
   beepSFX = new Audio("assets/sounds/beep.wav");
   ballLeftSFX = new Audio("assets/sounds/baphometsound.wav");
   ballRightSFX = new Audio("assets/sounds/christsound.wav");
@@ -69,6 +71,7 @@ function setup() {
   leftPaddle = new Paddle(0,height/2,40,90,30,83,87,leftPaddleImage);
   // Create portal in middle of cross
   portal = new Portal(354,370,120,120);
+  //portalGif.position(354,370,120,120);
 
   for (var i = 0; i < startingBalls; i++) {
   ballArray.push (new Ball(i*50,i*20,10,10,40,40));
@@ -84,6 +87,9 @@ function draw() {
   ///////// NEW ///////
   // created fancy backdrop for game //
   image(floor,0,0,700,900);
+  portalGif.position(294,310);
+  portalGif.size(120,120);
+  //image(portalGif,354,370,120,120);
   // Create scoreboard with text //
   fill (255, 255, 255);
   stroke(0,0,255);
@@ -220,7 +226,7 @@ function displayGameOver() {
   fill(255);
   stroke(255,0,0);
   textFont(fontGame);
-  text("TISK! TISK! TISK! \n GAME OVER ",width/2,height/1.3);
+  text("TISK! TISK! TISK! \n GAME OVER \n Refresh",width/2,height/1.3);
   pop();
 }
 ///////////// END NEW ///////////

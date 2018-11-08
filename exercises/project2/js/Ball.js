@@ -22,7 +22,7 @@ function Ball(x,y,vx,vy,size,speed) {
   this.scoreLeft = 0;
   this.scoreRight = 0;
 }
-  /////// END NEW ///////
+/////// END NEW ///////
 
 // update()
 //
