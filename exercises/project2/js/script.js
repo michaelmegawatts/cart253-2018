@@ -74,7 +74,7 @@ function setup() {
   //portalGif.position(354,370,120,120);
 
   for (var i = 0; i < startingBalls; i++) {
-  ballArray.push (new Ball(i*50,i*20,10,10,40,40));
+    ballArray.push (new Ball(i*50,i*20,10,10,40,40));
   }
 }
 ////////// END NEW ///////////
@@ -130,7 +130,7 @@ function draw() {
     ballArray[i].display();
     var scoreBoard = ballArray[i].isOffScreen();
 
-  if (scoreBoard == 1) {
+    if (scoreBoard == 1) {
       ball.scoreRight = ball.scoreRight +1;
     }
 
@@ -142,7 +142,7 @@ function draw() {
       state = "GAME OVER"
     }
     portal.handleCollisionBall(ballArray[i]);
-    }
+  }
 
   //////// NEW /////////
   // Set up display for title and where players are in game //

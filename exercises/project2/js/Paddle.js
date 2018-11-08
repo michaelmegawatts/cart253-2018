@@ -52,4 +52,4 @@ Paddle.prototype.display = function() {
   // Use image for paddles
   image(this.paddleImage,this.x,this.y,this.w,this.h);
 }
-  //////// END NEW /////////
+//////// END NEW /////////
