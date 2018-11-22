@@ -11,6 +11,7 @@ body {
   margin: 0;
 }
 
+/* to display canvas on fullscreen webpage*/
 canvas {
   display: block;
 }
