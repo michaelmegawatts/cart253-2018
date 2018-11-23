@@ -52,7 +52,7 @@ function draw() {
   background (255, 255, 255);
 
   // Sets up the conditions for the stamps to follow mouse and
-  // be stamped when mouse is pressed 
+  // be stamped when mouse is pressed
   if (stamped === false) {
     haloStamp.x = mouseX;
     haloStamp.y = mouseY;
