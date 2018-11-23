@@ -13,7 +13,8 @@ function Stamp(x,y,stampImage) {
   this.stampImage = stampImage;
   }
 
-  Stamp.prototype.update = function () {
+  Stamp.prototype.update = function (stampImage) {
+    this.stampImage = stampImage;
   }
 
   // Draw the halo as an image on screen
