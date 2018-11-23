@@ -27,8 +27,16 @@ function preload() {
 
  imageArray = [
    loadImage("assets/images/muscle.png"),
-   loadImage("assets/images/halo.png"),
-   loadImage("assets/images/banana.png")
+   loadImage("assets/images/heart.png"),
+   loadImage("assets/images/banana.png"),
+   loadImage("assets/images/arch.png"),
+   loadImage("assets/images/crystal.png"),
+   loadImage("assets/images/david.png"),
+   loadImage("assets/images/diva.png"),
+   loadImage("assets/images/fuck.png"),
+   loadImage("assets/images/mercury.png"),
+   loadImage("assets/images/sun.png"),
+   loadImage("assets/images/tilt.png"),
  ]
 }
 
@@ -42,13 +50,9 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   imageMode(CENTER);
 
-  for (var i = 0; i < imageArray.length; i++) {
-   }
-
   // Create halo stamp
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
 }
-
 
 // draw()
 //
@@ -60,12 +64,10 @@ function draw() {
 
   // Sets up the conditions for the stamps to follow mouse and
   // be stamped when mouse is pressed
-  if (stamped === false) {
+
     currentStamp.x = mouseX;
     currentStamp.y = mouseY;
-  }
-  // set up display for stamps
-  //imageArray.display ();
+
 
   // create mural to frame game
   image(mural,width/2,height/2,windowWidth,windowHeight);
@@ -77,7 +79,7 @@ function mousePressed() {
   console.log("test");
   currentStamp.display();
   currentStamp.update(imageArray[randomIndex]);
-//  stamped = true;
+
 }
 
 // set up canvas size to fit in window
