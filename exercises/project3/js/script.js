@@ -129,7 +129,7 @@ function displayTitle() {
     // will display the game instead
     masterpiece = "GAME";
 
-  // Loop for ambiance music for collage experience
+    // Loop for ambiance music for collage experience
     ambianceSFX.play();
     ambianceSFX.loop = true;
   }
