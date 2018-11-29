@@ -31,7 +31,7 @@ function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
-  ambianceSFX = new Audio("assets/sounds/ambiance.wav");
+  ambianceSFX = loadSound("assets/sounds/ambiance.wav");
 
   imageArray = [
     loadImage("assets/images/muscle.png"),
@@ -62,6 +62,9 @@ function setup() {
   // Create canvas
   createCanvas(windowWidth,windowHeight);
   imageMode(CENTER);
+
+  //reverb = new p5.Reverb();
+  //ambianceSFX.disconnect();
 
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
@@ -179,6 +182,10 @@ function handleInput() {
   }
   if(keyIsDown(DOWN_ARROW)) {
     currentStamp.stampSize -= 0.1;
+
+    //ambianceSFX.connect();
+    //reverb.process(ambianceSFX,10,20);
+    //ambianceSFX.play();
   }
 }
 
