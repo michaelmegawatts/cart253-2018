@@ -19,6 +19,8 @@ var collageStamps = [];
 
 var masterpiece = "TITLE";
 
+var angle;
+var stampAngle;
 
 // preload()
 //
@@ -30,6 +32,7 @@ function preload() {
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
   ambianceSFX = new Audio("assets/sounds/ambiance.wav");
+
 
   imageArray = [
     loadImage("assets/images/muscle.png"),
@@ -72,6 +75,7 @@ function draw() {
   // background for display
   background (255, 255, 255);
 
+
   // Set up instructions for when player experience begins and ends
   switch (masterpiece) {
     case "TITLE":
@@ -94,16 +98,17 @@ function draw() {
 // Calls random image to stamp and allows user to place image
 function mousePressed() {
   stamped =true;
-  var randomIndex = floor(random(0,imageArray.length));
   // calls array for new image and to keep image displayed on canvas after mouse is pressed
-  collageStamps.push(new Stamp (currentStamp.x,currentStamp.y,currentStamp.stampImage));
-  currentStamp.update(imageArray[randomIndex]);
+  collageStamps.push(currentStamp);
+  var randomIndex = floor(random(0,imageArray.length));
+  currentStamp = new Stamp (mouseX,mouseY,imageArray[randomIndex]);
 }
 
 // function that adds new image to mouse
 function mouseReleased() {
   stamped =false;
 }
+
 
 // Displays the title and controls on screen
 function displayTitle() {
@@ -156,6 +161,15 @@ function displayGame() {
     currentStamp.y = mouseY;
     currentStamp.display();
   }
+
+  handleInput();
+}
+
+function handleInput() {
+  if(keyIsDown(LEFT_ARROW)) {
+    currentStamp.stampAngle -= 0.1;
+  }
+
 }
 
 // TO BE DETERMINED LATER -- displayGameOver()

@@ -5,15 +5,17 @@
 // keyboard constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Keyboard(x,y,w,h,leftKey,rightKey,currentStamp) {
+function Keyboard(x,y,w,h,leftKey,rightKey,upKey,downKey,currentStampMove) {
   this.x = x;
   this.y = y;
   this.w = w;
   this.h = h;
 
-  this.downKey = leftKey;
-  this.upKey = rightKey;
-  this.keyboardImage = keyboardImage;
+  this.leftKey = leftKey;
+  this.rightKey = rightKey;
+  this.downKey = downKey;
+  this.upKey = upKey;
+  this.currentStampMove = currentStampMove;
 }
 
 // handleInput()

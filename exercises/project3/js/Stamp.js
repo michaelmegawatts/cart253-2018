@@ -6,11 +6,12 @@
 // Stamp constructor
 //
 // Sets the properties with the provided arguments for the stamp
-function Stamp(x,y,stampImage) {
+function Stamp(x,y,stampImage,stampSize) {
   this.x = x;
   this.y = y;
-  //this.size = size;
+  this.stampAngle = 0;
   this.stampImage = stampImage;
+  this.stampSize = this.stampSize;
   }
 
 // Updates stamp function images
@@ -20,5 +21,9 @@ function Stamp(x,y,stampImage) {
 
   // Draw images using stamp function
   Stamp.prototype.display = function () {
-    image(this.stampImage,this.x,this.y);
+    push();
+    translate(this.x,this.y);
+    rotate(this.stampAngle);
+    image(this.stampImage,0,0);
+    pop();
   }
