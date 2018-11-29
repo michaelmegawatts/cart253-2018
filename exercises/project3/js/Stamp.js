@@ -11,7 +11,7 @@ function Stamp(x,y,stampImage,stampSize) {
   this.y = y;
   this.stampAngle = 0;
   this.stampImage = stampImage;
-  this.stampSize = this.stampSize;
+  this.stampSize = 1;
   }
 
 // Updates stamp function images
@@ -19,11 +19,12 @@ function Stamp(x,y,stampImage,stampSize) {
     this.stampImage = stampImage;
   }
 
-  // Draw images using stamp function
+  // Draw images using stamp function, rotate and scale
   Stamp.prototype.display = function () {
     push();
     translate(this.x,this.y);
     rotate(this.stampAngle);
+    scale(this.stampSize);
     image(this.stampImage,0,0);
     pop();
   }

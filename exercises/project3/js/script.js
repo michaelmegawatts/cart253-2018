@@ -1,6 +1,6 @@
 /*****************
 
-Stamp
+CLICK ART MASTERPIECE
 Created by Michael Watts
 
 // Artistic collage using random images/stamps that appear and the user
@@ -17,10 +17,10 @@ var currentStamp;
 var stamped = false;
 var collageStamps = [];
 
+// Display for opening of game and end
 var masterpiece = "TITLE";
 
-var angle;
-var stampAngle;
+
 
 // preload()
 //
@@ -32,7 +32,6 @@ function preload() {
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
   ambianceSFX = new Audio("assets/sounds/ambiance.wav");
-
 
   imageArray = [
     loadImage("assets/images/muscle.png"),
@@ -108,8 +107,8 @@ function mousePressed() {
 function mouseReleased() {
   stamped =false;
 }
-
-
+// displayTitle()
+//
 // Displays the title and controls on screen
 function displayTitle() {
   // Create elements for display
@@ -120,12 +119,12 @@ function displayTitle() {
   //stroke(255,0,0);
   textFont(fontGame);
   // Display the text
-  text("CLICK ART !",width/2,height/4);
+  text("CLKRT MSTRPC!",width/2,height/4);
   // Font size goes down
-  textSize(40);
+  textSize(30);
   stroke(255,0,0);
   // Display the instructions
-  text("Collage without the glue and scissors. Yaaasssss! \n CLICK on your mouse \n and don't stop, ever! \n Press spacebar to begin a chef-d'oeuvre \n NOW ! ",width/2,height/2);
+  text("Collage without the glue and scissors. Yaaasssss! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n Press spacebar to begin a chef-d'oeuvre \n NOW ! ",width/2,height/2+50);
   pop();
 
   // Check whether the spacebar was pressed to start the game...
@@ -139,7 +138,8 @@ function displayTitle() {
     ambianceSFX.loop = true;
   }
 }
-
+// displayGame()
+//
 function displayGame() {
   //Create introductory text on screen
   fill(0, 0, 0);
@@ -164,12 +164,22 @@ function displayGame() {
 
   handleInput();
 }
-
+// handleInput ()
+//
+// Set up for arrow keys to rotate or scale stamps
 function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
   }
-
+  if(keyIsDown(RIGHT_ARROW)) {
+    currentStamp.stampAngle += 0.1;
+  }
+  if(keyIsDown(UP_ARROW)) {
+    currentStamp.stampSize += 0.1;
+  }
+  if(keyIsDown(DOWN_ARROW)) {
+    currentStamp.stampSize -= 0.1;
+  }
 }
 
 // TO BE DETERMINED LATER -- displayGameOver()
