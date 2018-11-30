@@ -20,7 +20,8 @@ var collageStamps = [];
 // Display for opening of game and end
 var masterpiece = "TITLE";
 
-
+var mic, recorder, soundFile;
+var state = 0;
 
 // preload()
 //
@@ -32,6 +33,7 @@ function preload() {
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
+  soundFileSFX = loadSound("assets>sounds/mySounds.wav");
 
   imageArray = [
     loadImage("assets/images/muscle.png"),
@@ -65,6 +67,20 @@ function setup() {
 
   //reverb = new p5.Reverb();
   //ambianceSFX.disconnect();
+  mic = new p5.AudioIn();
+
+    // prompts user to enable their browser mic
+    mic.start();
+
+    // create a sound recorder
+    recorder = new p5.SoundRecorder();
+
+    // connect the mic to the recorder
+    recorder.setInput(mic);
+
+    // this sound file will be used to
+    // playback & save the recording
+    soundFile = new p5.SoundFile();
 
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
@@ -110,6 +126,37 @@ function mousePressed() {
 function mouseReleased() {
   stamped =false;
 }
+
+function keyPressed() {
+  // make sure user enabled the mic
+  if (state === 0 && mic.enabled) {
+
+    // record to our p5.SoundFile
+    recorder.record(soundFile);
+
+    background(255,0,0);
+    text('Recording!', 20, 20);
+    state++;
+  }
+  else if (state === 1) {
+    background(0,255,0);
+
+    // stop recorder and
+    // send result to soundFile
+    recorder.stop();
+
+    text('Stopped', 20, 20);
+    state++;
+  }
+
+  else if (state === 2) {
+    soundFile.play(); // play the result!
+    save(soundFile, 'mySound.wav');
+    state++;
+  }
+}
+
+
 // displayTitle()
 //
 // Displays the title and controls on screen
@@ -186,6 +233,14 @@ function handleInput() {
     //ambianceSFX.connect();
     //reverb.process(ambianceSFX,10,20);
     //ambianceSFX.play();
+  }
+}
+
+// mouseClick triggers envelope
+function mouseClicked() {
+  // is mouse over canvas?
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+    env.play(noise);
   }
 }
 
