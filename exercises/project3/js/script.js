@@ -33,7 +33,7 @@ function preload() {
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
-  //soundFileSFX = loadSound("assets>sounds/mySounds.wav");
+
 
   imageArray = [
     loadImage("assets/images/muscle.png"),
@@ -150,7 +150,7 @@ function keyPressed() {
   }
 
   else if (state === 2) {
-    soundFile.play(); // play the result!
+    //soundFile.play(); // play the result!
     save(soundFile, 'mySound.wav');
     state++;
   }
@@ -220,6 +220,7 @@ function displayGame() {
 function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
+    soundFile.play();
   }
   if(keyIsDown(RIGHT_ARROW)) {
     currentStamp.stampAngle += 0.1;
