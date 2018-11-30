@@ -1,26 +1,30 @@
 // Basic OO Pong
-// by Pippin Barr
-//
-// A primitive implementation of Pong with no scoring system
-// just the ability to play the game with the keyboard.
+// by Pippin Barr spiced up by Michael Watts
 //
 // Arrow keys control the right hand paddle, W and S control
 // the left hand paddle.
+// Press Space Bar to start game. Game goes until 33points to allow
+// time for numerous balls to enter game
 //
 // Written with JavaScript OOP.
-
-// Variable to contain the objects representing our ball and paddles
+/////// NEW //////////
+// Variables to contain the objects representing the ball, paddles,
+// apple, and portal, and all visual accessories for the game
 var ball;
 var leftPaddle;
 var rightPaddle;
 var apple;
-///////// NEW //////////
-// Create variables for ball, apple, and paddles to replace with images //
+var portal;
+var portalGif;
+
+// Create variables for ball, apple, and paddles to be replaced with images
 var floor;
 var ballImage;
 var appleImage;
 var leftPaddleImage;
 var rightPaddleImage;
+var ballArray = []
+var startingBalls = 0;
 ///////// END NEW //////////
 
 ////////// NEW //////////
@@ -40,30 +44,40 @@ function preload() {
   appleImage = loadImage("assets/images/apple.png");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
   rightPaddleImage = loadImage("assets/images/christ.jpg");
+  portalGif = createImg("assets/images/portal.gif");
   beepSFX = new Audio("assets/sounds/beep.wav");
   ballLeftSFX = new Audio("assets/sounds/baphometsound.wav");
   ballRightSFX = new Audio("assets/sounds/christsound.wav");
-
+  appleSFX = new Audio("assets/sounds/applesound.wav");
+  ///////// END NEW //////////
 }
-///////// END NEW //////////
+
 // setup()
 //
 // Creates the ball and paddles
 // adjusted canvas size and shape, made ball larger, made paddles larger and pulled
 // them out onto the background for better visual
+////////// NEW ///////////
 function setup() {
   createCanvas(700,900);
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,40,40);
-// Create apple
-  apple = new Apple(width/2,height/2,5,5,40,40);
+  ball = new Ball(width/2,height/7,5,5,40,40);
+  // Create apple
+  apple = new Apple(width/2,height/4,5,5,60,60);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-60,height/2,40,90,10,DOWN_ARROW,UP_ARROW,rightPaddleImage);
+  rightPaddle = new Paddle(width-40,height/2,40,90,30,DOWN_ARROW,UP_ARROW,rightPaddleImage);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(20,height/2,40,90,10,83,87,leftPaddleImage);
-}
+  leftPaddle = new Paddle(0,height/2,40,90,30,83,87,leftPaddleImage);
+  // Create portal in middle of cross
+  portal = new Portal(354,370,120,120);
+  //portalGif.position(354,370,120,120);
 
+  for (var i = 0; i < startingBalls; i++) {
+    ballArray.push (new Ball(i*50,i*20,10,10,40,40));
+  }
+}
+////////// END NEW ///////////
 // draw()
 //
 // Handles input, updates all the elements, checks for collisions
@@ -73,7 +87,9 @@ function draw() {
   ///////// NEW ///////
   // created fancy backdrop for game //
   image(floor,0,0,700,900);
-
+  portalGif.position(294,310);
+  portalGif.size(120,120);
+  //image(portalGif,354,370,120,120);
   // Create scoreboard with text //
   fill (255, 255, 255);
   stroke(0,0,255);
@@ -84,25 +100,52 @@ function draw() {
   textFont(fontScore);
   //////// END NEW ////////
 
+
+  /////////// NEW //////////
+  // added updates for apple, ball, portal
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
-  ball.update();
+  apple.update();
   leftPaddle.update();
   rightPaddle.update();
 
+  apple.handleCollision(leftPaddle);
+  apple.handleCollision(rightPaddle);
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
-
+  portal.handleCollisionBall(ball);
+  portal.handleCollisionApple(apple);
 
   apple.display();
-  ball.display();
   leftPaddle.display();
   rightPaddle.display();
+  portal.display();
+  //////// END NEW ////////
+  // array to add multiple balls to the game that also relate to score
+  for (var i = 0; i < ballArray.length; i++) {
+    ballArray[i].update();
+    ballArray[i].handleCollision(leftPaddle);
+    ballArray[i].handleCollision(rightPaddle);
+    ballArray[i].display();
+    var scoreBoard = ballArray[i].isOffScreen();
 
+    if (scoreBoard == 1) {
+      ball.scoreRight = ball.scoreRight +1;
+    }
 
-//////// NEW /////////
-// Set up display for title and where players are in game //
+    else if (scoreBoard == 2) {
+      ball.scoreLeft = ball.scoreLeft +1;
+    }
+
+    if (ball.scoreRight == 33 || ball.scoreLeft == 33) {
+      state = "GAME OVER"
+    }
+    portal.handleCollisionBall(ballArray[i]);
+  }
+
+  //////// NEW /////////
+  // Set up display for title and where players are in game //
   switch (state) {
     case "TITLE":
     displayTitle();
@@ -110,6 +153,8 @@ function draw() {
 
     case "GAME":
     displayGame();
+    ball.update();
+    ball.display();
     break;
 
     case "GAME OVER":
@@ -117,6 +162,8 @@ function draw() {
     break;
   }
 }
+//////// END NEW ////////
+
 //////// NEW //////////
 // Displays the title and controls on the screen
 function displayTitle() {
@@ -142,25 +189,31 @@ function displayTitle() {
     state = "GAME";
   }
 }
+//////// END NEW ////////
 
+///////// NEW ////////////
+// displayGame()
+// Handle the display of the score
 function displayGame() {
-  ///////// NEW ////////////
+  // calling the OffScreen function for apple to return on screen
+  apple.isOffScreen();
   // Create variable to calculate when score changes for each side //
   var scoreBoard = ball.isOffScreen();
-    //if (ball.isOffScreen()) {
-    //ball.reset();
-    if (scoreBoard == 1) {
-      ball.scoreRight = ball.scoreRight +1;
-    }
+  //if (ball.isOffScreen()) {
+  //ball.reset();
+  if (scoreBoard == 1) {
+    ball.scoreRight = ball.scoreRight +1;
+  }
 
-    else if (scoreBoard == 2) {
-      ball.scoreLeft = ball.scoreLeft +1;
-    }
+  else if (scoreBoard == 2) {
+    ball.scoreLeft = ball.scoreLeft +1;
+  }
 
-    if (ball.scoreRight == 13 || ball.scoreLeft == 13) {
-      state = "GAME OVER"
-    }
+  if (ball.scoreRight == 33 || ball.scoreLeft == 33) {
+    state = "GAME OVER"
+  }
 }
+//////// END NEW ////////
 
 /////////// NEW ///////////
 // displayGameOver()
@@ -173,6 +226,7 @@ function displayGameOver() {
   fill(255);
   stroke(255,0,0);
   textFont(fontGame);
-  text("TISK! TISK! TISK!",width/2,height/1.3);
+  text("TISK! TISK! TISK! \n GAME OVER \n Refresh",width/2,height/1.3);
   pop();
 }
+///////////// END NEW ///////////
