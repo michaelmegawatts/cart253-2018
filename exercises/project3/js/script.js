@@ -33,7 +33,7 @@ function preload() {
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
-  soundFileSFX = loadSound("assets>sounds/mySounds.wav");
+  //soundFileSFX = loadSound("assets>sounds/mySounds.wav");
 
   imageArray = [
     loadImage("assets/images/muscle.png"),
