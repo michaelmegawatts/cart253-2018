@@ -35,7 +35,7 @@ var state = "TITLE";
 function preload() {
   fontScore = loadFont("assets/fonts/dicefont.ttf");
   fontGame = loadFont("assets/fonts/hultogital.ttf");
-  floor = loadImage("assets/images/tarot.png"); 
+  floor = loadImage("assets/images/tarot.png");
   ballImage = loadImage("assets/images/ball.jpg");
   appleImage = loadImage("assets/images/apple.png");
   leftPaddleImage = loadImage("assets/images/baphomet.jpg");
