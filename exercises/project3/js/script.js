@@ -133,26 +133,23 @@ function keyPressed() {
 
     // record to our p5.SoundFile
     recorder.record(soundFile);
-
-    background(255,0,0);
-    text('Recording!', 20, 20);
     state++;
   }
   else if (state === 1) {
-    background(0,255,0);
 
     // stop recorder and
     // send result to soundFile
     recorder.stop();
-
-    text('Stopped', 20, 20);
+    save(soundFile, 'mySound.wav');
+    mic.stop();
     state++;
   }
 
   else if (state === 2) {
     //soundFile.play(); // play the result!
-    save(soundFile, 'mySound.wav');
+    //save(soundFile, 'mySound.wav');
     state++;
+    //mic.stop();
   }
 }
 
@@ -184,8 +181,8 @@ function displayTitle() {
     masterpiece = "GAME";
 
     // Loop for ambiance music for collage experience
-    ambianceSFX.play();
-    ambianceSFX.loop = true;
+    //ambianceSFX.play();
+    //ambianceSFX.loop = true;
   }
 }
 // displayGame()
@@ -221,6 +218,8 @@ function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
     soundFile.play();
+    //if(soundFile.isPlaying() ==false){
+    //}
   }
   if(keyIsDown(RIGHT_ARROW)) {
     currentStamp.stampAngle += 0.1;
@@ -240,9 +239,9 @@ function handleInput() {
 // mouseClick triggers envelope
 function mouseClicked() {
   // is mouse over canvas?
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-    env.play(noise);
-  }
+  // if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+  //   env.play(noise);
+  // }
 }
 
 // TO BE DETERMINED LATER -- displayGameOver()
