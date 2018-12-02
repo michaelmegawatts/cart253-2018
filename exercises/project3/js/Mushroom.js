@@ -14,6 +14,7 @@ function Mushroom(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+}
 
 // update()
 //
@@ -30,15 +31,12 @@ Mushroom.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+    }
   }
-
-
-}
 
 // display()
 //
 // Draw the Mushroom as an image on screen
 Mushroom.prototype.display = function () {
-  fill(255);
   image(mushroomImage,this.x,this.y,this.size,this.size);
 }

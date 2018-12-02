@@ -10,10 +10,17 @@ Special thanks to Pippin, Sabine, Samuel, and Michael for the help!!!
 
 ******************/
 // Variables to contain the canvas and stamps that will be
-// used during the experience
+// used during the experience. Variables for mushrooms and array for multiple
+// mushrooms.
 var mural;
+var mushroom;
+
+var mushroomImage;
 
 var imageArray = [];
+var mushroomArray = [];
+
+var startingMushroom = 0;
 
 var currentStamp;
 var stamped = false;
@@ -33,6 +40,7 @@ var state = 0;
 function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
+  mushroomImage = loadImage("assets/images/mushroom.png");
 
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
 
@@ -67,25 +75,33 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   imageMode(CENTER);
 
+
   //reverb = new p5.Reverb();
   //ambianceSFX.disconnect();
   mic = new p5.AudioIn();
 
-    // prompts user to enable their browser mic
-    mic.start();
+  // prompts user to enable their browser mic
+  mic.start();
 
-    // create a sound recorder
-    recorder = new p5.SoundRecorder();
+  // create a sound recorder
+  recorder = new p5.SoundRecorder();
 
-    // connect the mic to the recorder
-    recorder.setInput(mic);
+  // connect the mic to the recorder
+  recorder.setInput(mic);
 
-    // this sound file will be used to
-    // playback & save the recording
-    soundFile = new p5.SoundFile();
+  // this sound file will be used to
+  // playback & save the recording
+  soundFile = new p5.SoundFile();
 
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
+
+  // Create mushroom function
+  mushroom = new Mushroom(width/2,height/2,5,5,40,40);
+
+  for (var i = 0; i < startingMushroom; i++) {
+    mushroomArray.push (new Mushroom(i*50,i*20,10,10,40,40));
+  }
 }
 
 // draw()
@@ -104,6 +120,8 @@ function draw() {
 
     case "GAME":
     displayGame();
+    mushroom.update();
+    mushroom.display();
     break;
 
     case "GAME OVER":
@@ -132,7 +150,6 @@ function mouseReleased() {
 function keyPressed() {
   // make sure user enabled the mic
   if (state === 0 && mic.enabled) {
-
     // record to our p5.SoundFile
     recorder.record(soundFile);
     state++;
@@ -204,6 +221,12 @@ function displayGame() {
     collageStamps[i].display();
   }
 
+  // Sets up the conditions for the mushrooms to appear when key is pressed
+  for (var i = 0; i < mushroomArray.length; i++) {
+    mushroomArray[i].update();
+    mushroomArray[i].display();
+  }
+
   // add a random image to mouse location
   if (stamped === false) {
     currentStamp.x = mouseX;
@@ -231,11 +254,14 @@ function handleInput() {
   }
   if(keyIsDown(DOWN_ARROW)) {
     currentStamp.stampSize -= 0.1;
-
-    //ambianceSFX.connect();
-    //reverb.process(ambianceSFX,10,20);
-    //ambianceSFX.play();
   }
+  if(keyIsDown(SHIFT)) {
+
+  }
+
+  //ambianceSFX.connect();
+  //reverb.process(ambianceSFX,10,20);
+  //ambianceSFX.play();
 }
 
 // mouseClick triggers envelope
