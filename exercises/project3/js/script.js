@@ -3,6 +3,8 @@
 CLICK ART MASTERPIECE
 Created by Michael Watts
 
+Special thanks to Pippin, Sabine, Samuel, and Michael for the help!!!
+
 // Artistic collage using random images/stamps that appear and the user
 // can select where on the canvas they want the stamps to appear
 
