@@ -69,18 +69,18 @@ function setup() {
   //ambianceSFX.disconnect();
   mic = new p5.AudioIn();
 
-    // prompts user to enable their browser mic
-    mic.start();
+  // prompts user to enable their browser mic
+  mic.start();
 
-    // create a sound recorder
-    recorder = new p5.SoundRecorder();
+  // create a sound recorder
+  recorder = new p5.SoundRecorder();
 
-    // connect the mic to the recorder
-    recorder.setInput(mic);
+  // connect the mic to the recorder
+  recorder.setInput(mic);
 
-    // this sound file will be used to
-    // playback & save the recording
-    soundFile = new p5.SoundFile();
+  // this sound file will be used to
+  // playback & save the recording
+  soundFile = new p5.SoundFile();
 
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
