@@ -24,15 +24,15 @@ var collageStamps = [];
 
 // Display for opening of game and end
 var masterpiece = "TITLE";
-
+// Set up variable for voice recording
 var mic, recorder, soundFile;
 var state = 0;
 
 // preload()
 //
 // Description of preload
-
-// Set up canvas called "mural", text for introduction, set up sound ambiance, and array containing images for collage action
+// Set up canvas called "mural", text for introduction, set up sound ambiance,
+// and array containing images for collage action
 function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
@@ -65,12 +65,12 @@ function preload() {
 // setup()
 //
 // Description of setup
-
 function setup() {
   // Create canvas
   createCanvas(windowWidth,windowHeight);
   imageMode(CENTER);
 
+  // set up mic input
   mic = new p5.AudioIn();
 
   // prompts user to enable their browser mic
@@ -98,7 +98,6 @@ function draw() {
   // background for display
   background (255, 255, 255);
 
-
   // Set up instructions for when player experience begins and ends
   switch (masterpiece) {
     case "TITLE":
@@ -107,8 +106,6 @@ function draw() {
 
     case "GAME":
     displayGame();
-    //mushroom.update();
-    //mushroom.display();
     break;
 
     case "GAME OVER":
@@ -129,11 +126,11 @@ function mousePressed() {
   currentStamp = new Stamp (mouseX,mouseY,imageArray[randomIndex]);
 }
 
-// function that adds new image to mouse
+// Calls new image to mouse
 function mouseReleased() {
   stamped =false;
 }
-
+// Calls mic to enable, record, stop, and save file for replay
 function keyPressed() {
   // make sure user enabled the mic
   if (state === 0 && mic.enabled) {
@@ -142,7 +139,6 @@ function keyPressed() {
     state++;
   }
   else if (state === 1) {
-
     // stop recorder and
     // send result to soundFile
     recorder.stop();
@@ -150,7 +146,6 @@ function keyPressed() {
     mic.stop();
     state++;
   }
-
   else if (state === 2) {
     //soundFile.play(); // play the result!
     //save(soundFile, 'mySound.wav');
@@ -169,14 +164,12 @@ function displayTitle() {
   textAlign(CENTER,CENTER);
   textSize(100);
   fill(0,0,0);
-  //stroke(255,0,0);
   textFont(fontGame);
   // Display the text
   text("CLKRT MSTRPC!",width/2,height/4);
-  // Font size goes down
   textSize(30);
   stroke(255,0,0);
-  // Display the instructions
+  // Display the instructions for the experience
   text("Collage without the glue and scissors. Yaaasssss! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n SHIFT = a little magic \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
   pop();
 
@@ -185,10 +178,8 @@ function displayTitle() {
     // ... if it was, change the state to "GAME" so the switch statement in draw()
     // will display the game instead
     masterpiece = "GAME";
-
-    //Loop for ambiance music for collage experience
+    //Call ambiance music for collage experience
     ambianceSFX.play();
-    ambianceSFX.loop = true;
   }
 }
 // displayGame()
@@ -207,13 +198,11 @@ function displayGame() {
   for(var i = 0; i < collageStamps.length; i++) {
     collageStamps[i].display();
   }
-
   // Sets up the conditions for the mushrooms to appear when key is pressed
   for (var i = 0; i < mushroomArray.length; i++) {
     mushroomArray[i].update();
     mushroomArray[i].display();
   }
-
   // add a random image to mouse location
   if (stamped === false) {
     currentStamp.x = mouseX;
@@ -225,12 +214,12 @@ function displayGame() {
 }
 // handleInput ()
 //
-// Set up for arrow keys to rotate or scale stamps, and add a mushroom
+// Set up for arrow keys to rotate or scale stamps, and add mushrooms
 function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
-  //play recorded sound when key is pressed
-  if (soundFile.isPlaying() === false) {
+    //play recorded sound when key is pressed
+    if (soundFile.isPlaying() === false) {
       soundFile.play();
     }
   }
@@ -244,17 +233,14 @@ function handleInput() {
     currentStamp.stampSize -= 0.1;
   }
   if(keyIsDown(SHIFT)) {
-  mushroomArray.push(new Mushroom(random(width),random(height),random(10),random(10),40,40));
+    mushroomArray.push(new Mushroom(random(width),random(height),random(10),random(10),40,40));
   }
-
 }
 
 // mouseClick triggers envelope
 function mouseClicked() {
   // is mouse over canvas?
-  // if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-  //   env.play(noise);
-  // }
+
 }
 
 // TO BE DETERMINED LATER -- displayGameOver()
@@ -267,7 +253,7 @@ function displayGameOver() {
   fill(255);
   stroke(255,0,0);
   textFont(fontGame);
-  text("Your artistic experience is over \n sorry Warhol? \n Don't give up your day job",width/2,height/2);
+  text("Your artistic experience is terminated \n sorry Warhol? \n Don't give up your day job \n REFRESH to play again :)",width/2,height/2);
   pop();
 }
 
