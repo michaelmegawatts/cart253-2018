@@ -3,15 +3,24 @@
 CLICK ART MASTERPIECE
 Created by Michael Watts
 
+Special thanks to Pippin, Sabine, Samuel, and Michael for the help!!!
+
 // Artistic collage using random images/stamps that appear and the user
 // can select where on the canvas they want the stamps to appear
 
 ******************/
 // Variables to contain the canvas and stamps that will be
-// used during the experience
+// used during the experience. Variables for mushrooms and array for multiple
+// mushrooms.
 var mural;
+var mushroom;
+
+var mushroomImage;
 
 var imageArray = [];
+var mushroomArray = [];
+
+var startingMushroom = 0;
 
 var currentStamp;
 var stamped = false;
@@ -31,6 +40,7 @@ var state = 0;
 function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
+  mushroomImage = loadImage("assets/images/mushroom.png");
 
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
 
@@ -65,6 +75,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   imageMode(CENTER);
 
+
   //reverb = new p5.Reverb();
   //ambianceSFX.disconnect();
   mic = new p5.AudioIn();
@@ -84,6 +95,13 @@ function setup() {
 
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
+
+  // Create mushroom function
+  mushroom = new Mushroom(width/2,height/2,5,5,40,40);
+
+  for (var i = 0; i < startingMushroom; i++) {
+    mushroomArray.push (new Mushroom(i*50,i*20,10,10,40,40));
+  }
 }
 
 // draw()
@@ -102,6 +120,8 @@ function draw() {
 
     case "GAME":
     displayGame();
+    mushroom.update();
+    mushroom.display();
     break;
 
     case "GAME OVER":
@@ -130,7 +150,6 @@ function mouseReleased() {
 function keyPressed() {
   // make sure user enabled the mic
   if (state === 0 && mic.enabled) {
-
     // record to our p5.SoundFile
     recorder.record(soundFile);
     state++;
@@ -171,7 +190,7 @@ function displayTitle() {
   textSize(30);
   stroke(255,0,0);
   // Display the instructions
-  text("Collage without the glue and scissors. Yaaasssss! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n Press spacebar to begin a chef-d'oeuvre \n NOW ! ",width/2,height/2+50);
+  text("Collage without the glue and scissors. Yaaasssss! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
   pop();
 
   // Check whether the spacebar was pressed to start the game...
@@ -180,9 +199,9 @@ function displayTitle() {
     // will display the game instead
     masterpiece = "GAME";
 
-    // Loop for ambiance music for collage experience
-    //ambianceSFX.play();
-    //ambianceSFX.loop = true;
+    //Loop for ambiance music for collage experience
+    ambianceSFX.play();
+    ambianceSFX.loop = true;
   }
 }
 // displayGame()
@@ -200,6 +219,12 @@ function displayGame() {
   // call the collageStamps array to keep them displayed on canvas
   for(var i = 0; i < collageStamps.length; i++) {
     collageStamps[i].display();
+  }
+
+  // Sets up the conditions for the mushrooms to appear when key is pressed
+  for (var i = 0; i < mushroomArray.length; i++) {
+    mushroomArray[i].update();
+    mushroomArray[i].display();
   }
 
   // add a random image to mouse location
@@ -229,11 +254,14 @@ function handleInput() {
   }
   if(keyIsDown(DOWN_ARROW)) {
     currentStamp.stampSize -= 0.1;
-
-    //ambianceSFX.connect();
-    //reverb.process(ambianceSFX,10,20);
-    //ambianceSFX.play();
   }
+  if(keyIsDown(SHIFT)) {
+
+  }
+
+  //ambianceSFX.connect();
+  //reverb.process(ambianceSFX,10,20);
+  //ambianceSFX.play();
 }
 
 // mouseClick triggers envelope
