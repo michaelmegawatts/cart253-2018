@@ -156,9 +156,7 @@ function keyPressed() {
     //save(soundFile, 'mySound.wav');
     state++;
     //mic.stop();
-
   }
-
 }
 
 
@@ -179,7 +177,7 @@ function displayTitle() {
   textSize(30);
   stroke(255,0,0);
   // Display the instructions
-  text("Collage without the glue and scissors. Yaaasssss! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
+  text("Collage without the glue and scissors. Yaaasssss! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n SHIFT = a little magic \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
   pop();
 
   // Check whether the spacebar was pressed to start the game...
@@ -227,7 +225,7 @@ function displayGame() {
 }
 // handleInput ()
 //
-// Set up for arrow keys to rotate or scale stamps
+// Set up for arrow keys to rotate or scale stamps, and add a mushroom
 function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
@@ -246,8 +244,7 @@ function handleInput() {
     currentStamp.stampSize -= 0.1;
   }
   if(keyIsDown(SHIFT)) {
-  //  mushroomImage.display = +1;
-  mushroomArray.push(new Mushroom (width/2,height/2,5,5,40,40));
+  mushroomArray.push(new Mushroom(random(width),random(height),random(10),random(10),40,40));
   }
 
 }
@@ -270,7 +267,7 @@ function displayGameOver() {
   fill(255);
   stroke(255,0,0);
   textFont(fontGame);
-  text("Your artistic experience is over \n what is the point? \n Don't give up your day job",width/2,height/2);
+  text("Your artistic experience is over \n sorry Warhol? \n Don't give up your day job",width/2,height/2);
   pop();
 }
 

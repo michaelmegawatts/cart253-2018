@@ -25,13 +25,19 @@ Mushroom.prototype.update = function () {
   this.x += this.vx;
   this.y += this.vy;
 
-  // Constrain y position to be on screen
+  // Constrain x + y position to be on screen
+  this.x = constrain(this.x,0,width-this.size);
   this.y = constrain(this.y,0,height-this.size);
+
 
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
     }
+  // Check for touching left or right of screen and reverse velocity if so
+  if (this.x === 0 || this.x + this.size === width) {
+      this.vx = -this.vx;
+      }
   }
 
 // display()
