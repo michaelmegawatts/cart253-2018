@@ -13,7 +13,6 @@ function Mushroom(x,y,vx,vy,size) {
   this.vx = vx;
   this.vy = vy;
   this.size = size;
-
 }
 
 // update()
