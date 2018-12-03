@@ -7,13 +7,13 @@
 // Mushroom constructor
 //
 // Sets the properties with the provided arguments
-function Mushroom(x,y,vx,vy,size,speed) {
+function Mushroom(x,y,vx,vy,size) {
   this.x = x;
   this.y = y;
   this.vx = vx;
   this.vy = vy;
   this.size = size;
-  this.speed = speed;
+
 }
 
 // update()

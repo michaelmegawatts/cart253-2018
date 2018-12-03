@@ -13,14 +13,10 @@ Special thanks to Pippin, Sabine, Samuel, and Michael for the help!!!
 // used during the experience. Variables for mushrooms and array for multiple
 // mushrooms.
 var mural;
-var mushroom;
-
 var mushroomImage;
 
 var imageArray = [];
 var mushroomArray = [];
-
-var startingMushroom = 0;
 
 var currentStamp;
 var stamped = false;
@@ -41,7 +37,6 @@ function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
   mushroomImage = loadImage("assets/images/mushroom.png");
-
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
 
 
@@ -64,6 +59,7 @@ function preload() {
     loadImage("assets/images/atlas.png"),
     loadImage("assets/images/keith.png"),
   ]
+
 }
 
 // setup()
@@ -75,9 +71,6 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   imageMode(CENTER);
 
-
-  //reverb = new p5.Reverb();
-  //ambianceSFX.disconnect();
   mic = new p5.AudioIn();
 
   // prompts user to enable their browser mic
@@ -96,12 +89,6 @@ function setup() {
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
 
-  // Create mushroom function
-  mushroom = new Mushroom(width/2,height/2,5,5,40,40);
-
-  for (var i = 0; i < startingMushroom; i++) {
-    mushroomArray.push (new Mushroom(i*50,i*20,10,10,40,40));
-  }
 }
 
 // draw()
@@ -120,8 +107,8 @@ function draw() {
 
     case "GAME":
     displayGame();
-    mushroom.update();
-    mushroom.display();
+    //mushroom.update();
+    //mushroom.display();
     break;
 
     case "GAME OVER":
@@ -169,7 +156,9 @@ function keyPressed() {
     //save(soundFile, 'mySound.wav');
     state++;
     //mic.stop();
+
   }
+
 }
 
 
@@ -242,9 +231,10 @@ function displayGame() {
 function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
-    soundFile.play();
-    //if(soundFile.isPlaying() ==false){
-    //}
+  //play recorded sound when key is pressed
+  if (soundFile.isPlaying() === false) {
+      soundFile.play();
+    }
   }
   if(keyIsDown(RIGHT_ARROW)) {
     currentStamp.stampAngle += 0.1;
@@ -256,12 +246,10 @@ function handleInput() {
     currentStamp.stampSize -= 0.1;
   }
   if(keyIsDown(SHIFT)) {
-
+  //  mushroomImage.display = +1;
+  mushroomArray.push(new Mushroom (width/2,height/2,5,5,40,40));
   }
 
-  //ambianceSFX.connect();
-  //reverb.process(ambianceSFX,10,20);
-  //ambianceSFX.play();
 }
 
 // mouseClick triggers envelope
