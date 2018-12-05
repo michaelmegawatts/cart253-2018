@@ -2,7 +2,7 @@
 //
 // A class to define how a mushroom behaves. Including bouncing on all
 // sides of the canvas
-// and bouncing off paddles.
+
 
 // Mushroom constructor
 //

@@ -28,6 +28,7 @@ var masterpiece = "TITLE";
 var mic, recorder, soundFile;
 var state = 0;
 
+
 // preload()
 //
 // Description of preload
@@ -59,7 +60,6 @@ function preload() {
     loadImage("assets/images/atlas.png"),
     loadImage("assets/images/keith.png"),
   ]
-
 }
 
 // setup()
@@ -88,7 +88,6 @@ function setup() {
 
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
-
 }
 
 // draw()
@@ -150,7 +149,6 @@ function keyPressed() {
     //soundFile.play(); // play the result!
     //save(soundFile, 'mySound.wav');
     state++;
-    //mic.stop();
   }
 }
 
@@ -211,6 +209,10 @@ function displayGame() {
   }
 
   handleInput();
+
+  if (ambianceSFX.isPlaying() === false) {
+    masterpiece = "GAME OVER";
+  }
 }
 // handleInput ()
 //
@@ -221,6 +223,7 @@ function handleInput() {
     //play recorded sound when key is pressed
     if (soundFile.isPlaying() === false) {
       soundFile.play();
+      //soundFile.setVolume(1.0);
     }
   }
   if(keyIsDown(RIGHT_ARROW)) {
@@ -240,20 +243,17 @@ function handleInput() {
 // mouseClick triggers envelope
 function mouseClicked() {
   // is mouse over canvas?
-
 }
-
-// TO BE DETERMINED LATER -- displayGameOver()
 //
 // Displays game over text
 function displayGameOver() {
   push();
   textAlign(CENTER,CENTER);
-  textSize(80);
-  fill(255);
+  textSize(60);
+  fill(0,0,0);
   stroke(255,0,0);
   textFont(fontGame);
-  text("Your artistic experience is terminated \n sorry Warhol? \n Don't give up your day job \n REFRESH to play again :)",width/2,height/2);
+  text("Your artistic experience is terminated \n sorry Warhol \n  \n REFRESH to play again :)",width/2,height/2);
   pop();
 }
 
