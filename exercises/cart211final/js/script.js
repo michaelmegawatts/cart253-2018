@@ -35,7 +35,7 @@ function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
 
-  ambianceSFX = loadSound("assets/sounds/ambiance.wav");
+  ambianceSFX = loadSound("assets/sounds/rainforest.wav");
 
 
   imageArray = [
