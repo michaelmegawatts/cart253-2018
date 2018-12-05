@@ -13,14 +13,8 @@ Special thanks to Pippin, Sabine, Samuel, and Michael for the help!!!
 // used during the experience. Variables for mushrooms and array for multiple
 // mushrooms.
 var mural;
-var mushroom;
-
-var mushroomImage;
 
 var imageArray = [];
-var mushroomArray = [];
-
-var startingMushroom = 0;
 
 var currentStamp;
 var stamped = false;
@@ -40,7 +34,6 @@ var state = 0;
 function preload() {
   mural = loadImage("assets/images/mural.png");
   fontGame = loadFont("assets/fonts/cabin.ttf");
-  mushroomImage = loadImage("assets/images/mushroom.png");
 
   ambianceSFX = loadSound("assets/sounds/ambiance.wav");
 
@@ -57,6 +50,11 @@ function preload() {
     loadImage("assets/images/redpanda.png"),
     loadImage("assets/images/rhinos.png"),
     loadImage("assets/images/tiger.png"),
+    loadImage("assets/images/mushroom.png"),
+    loadImage("assets/images/bee.png"),
+    loadImage("assets/images/gueko.png"),
+    loadImage("assets/images/kangaroo.png"),
+    loadImage("assets/images/lemur.png"),
   ]
 }
 
@@ -90,12 +88,6 @@ function setup() {
   // Create stamp function
   currentStamp = new Stamp(width/2,height/2,imageArray[0]);
 
-  // Create mushroom function
-  mushroom = new Mushroom(width/2,height/2,5,5,40,40);
-
-  for (var i = 0; i < startingMushroom; i++) {
-    mushroomArray.push (new Mushroom(i*50,i*20,10,10,40,40));
-  }
 }
 
 // draw()
@@ -114,8 +106,6 @@ function draw() {
 
     case "GAME":
     displayGame();
-    mushroom.update();
-    mushroom.display();
     break;
 
     case "GAME OVER":
@@ -176,15 +166,14 @@ function displayTitle() {
   textAlign(CENTER,CENTER);
   textSize(100);
   fill(0,0,0);
-  //stroke(255,0,0);
   textFont(fontGame);
   // Display the text
-  text("CLKRT MSTRPC!",width/2,height/4);
+  text("EARTH ART",width/2,height/4);
   // Font size goes down
   textSize(30);
-  stroke(255,0,0);
+  stroke(0,255,0);
   // Display the instructions
-  text("Don't give up hope for our planet. Make art! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
+  text("Don't give up hope for our planet. Make art! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n SHIFT = a little magic \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... speak loud or use mic for best result \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
   pop();
 
   // Check whether the spacebar was pressed to start the game...
@@ -195,7 +184,6 @@ function displayTitle() {
 
     //Loop for ambiance music for collage experience
     ambianceSFX.play();
-    ambianceSFX.loop = true;
   }
 }
 // displayGame()
@@ -215,12 +203,6 @@ function displayGame() {
     collageStamps[i].display();
   }
 
-  // Sets up the conditions for the mushrooms to appear when key is pressed
-  for (var i = 0; i < mushroomArray.length; i++) {
-    mushroomArray[i].update();
-    mushroomArray[i].display();
-  }
-
   // add a random image to mouse location
   if (stamped === false) {
     currentStamp.x = mouseX;
@@ -229,6 +211,10 @@ function displayGame() {
   }
 
   handleInput();
+// Call Game Over
+  if (ambianceSFX.isPlaying() === false) {
+    masterpiece = "GAME OVER";
+  }
 }
 // handleInput ()
 //
@@ -237,8 +223,6 @@ function handleInput() {
   if(keyIsDown(LEFT_ARROW)) {
     currentStamp.stampAngle -= 0.1;
     soundFile.play();
-    //if(soundFile.isPlaying() ==false){
-    //}
   }
   if(keyIsDown(RIGHT_ARROW)) {
     currentStamp.stampAngle += 0.1;
@@ -252,10 +236,6 @@ function handleInput() {
   if(keyIsDown(SHIFT)) {
 
   }
-
-  //ambianceSFX.connect();
-  //reverb.process(ambianceSFX,10,20);
-  //ambianceSFX.play();
 }
 
 // mouseClick triggers envelope
@@ -272,11 +252,11 @@ function mouseClicked() {
 function displayGameOver() {
   push();
   textAlign(CENTER,CENTER);
-  textSize(80);
-  fill(255);
-  stroke(255,0,0);
+  textSize(60);
+  fill(0,0,0);
+  stroke(0,255,0);
   textFont(fontGame);
-  text("Your artistic experience is over \n what is the point? \n Don't give up your day job",width/2,height/2);
+  text("Your artistic experience is over \n \n Save our one and only Planet \n  REFRESH to play again",width/2,height/2);
   pop();
 }
 
