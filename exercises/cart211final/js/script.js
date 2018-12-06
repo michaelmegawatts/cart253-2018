@@ -33,7 +33,7 @@ var state = 0;
 // Set up canvas called "mural", text for introduction, set up sound ambiance, and array containing images for collage action
 function preload() {
   mural = loadImage("assets/images/mural.png");
-  fontGame = loadFont("assets/fonts/cabin.ttf");
+  fontGame = loadFont("assets/fonts/cbyg.ttf");
 
   ambianceSFX = loadSound("assets/sounds/rainforest.wav");
 
@@ -164,16 +164,16 @@ function displayTitle() {
   // Create elements for display
   push();
   textAlign(CENTER,CENTER);
-  textSize(100);
+  textSize(80);
   fill(0,0,0);
   textFont(fontGame);
   // Display the text
-  text("EARTH ART",width/2,height/4);
+  text("PLANET eCOLLAGE",width/2,height/4);
   // Font size goes down
-  textSize(30);
-  stroke(0,255,0);
+  textSize(25);
+
   // Display the instructions
-  text("Don't give up hope for our planet. Make art! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n SHIFT = a little magic \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... speak loud or use mic for best result \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
+  text("Don't give up hope for our planet. Make art and spread awareness! \n LEFT ARROW = rotate-L \n RIGHT ARROW = rotate-R \n UP ARROW = expand \n DOWN ARROW = shrink \n SHIFT = a little magic \n CLICK on your mouse to stamp \n and don't stop, EVER ! \n \n Start by recording your voice... speak loud or use mic for best result \n Press any button to record - Say something silly or poetic - press any button to stop \n Now, press spacebar to begin a chef-d'oeuvre",width/2,height/2+50);
   pop();
 
   // Check whether the spacebar was pressed to start the game...
@@ -191,7 +191,6 @@ function displayTitle() {
 function displayGame() {
   //Create introductory text on screen
   fill(0, 0, 0);
-  stroke(255,0,0);
   textFont(fontGame);
   textSize(100);
   textAlign(CENTER,CENTER);
@@ -252,9 +251,8 @@ function mouseClicked() {
 function displayGameOver() {
   push();
   textAlign(CENTER,CENTER);
-  textSize(60);
+  textSize(40);
   fill(0,0,0);
-  stroke(0,255,0);
   textFont(fontGame);
   text("Your artistic experience is over \n \n Save our one and only Planet \n  REFRESH to play again",width/2,height/2);
   pop();
